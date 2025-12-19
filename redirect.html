@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,6 +23,7 @@
       padding:22px 26px;
       border-radius:12px;
       box-shadow:0 10px 30px rgba(0,0,0,0.08);
+      max-width:320px;
     }
     .spinner{
       width:38px;
@@ -43,27 +45,23 @@
   </style>
 
   <script>
-    // Telegram links
-    const telegramWeb = "https://telegram.me/+MRxo8wfkrTliZDk1";
-    const telegramApp = "tg://join?invite=MRxo8wfkrTliZDk1";
+    // Telegram WEB link only (Deep linking removed)
+    const telegramWeb = "https://t.me/+MRxo8wfkrTliZDk1";
 
-    // Try to open Telegram App
-    window.location.href = telegramApp;
-
-    // Fallback to web after 1.5 seconds
+    // Auto redirect to Telegram web
     setTimeout(function(){
       window.location.href = telegramWeb;
-    }, 1500);
+    }, 800);
   </script>
 </head>
 
 <body>
   <div class="box">
     <div class="spinner"></div>
-    <div>Opening Telegram App…</div>
+    <div>Redirecting to Telegram…</div>
     <div style="font-size:13px;margin-top:6px;">
-      If nothing happens,
-      <a href="https://telegram.me/+MRxo8wfkrTliZDk1">open in browser</a>
+      If not redirected,
+      <a href="https://t.me/+MRxo8wfkrTliZDk1">click here</a>
     </div>
   </div>
 </body>
