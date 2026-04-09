@@ -176,10 +176,19 @@ src="https://www.facebook.com/tr?id=2678883535802327&ev=PageView&noscript=1"
     <small>No financial advice • Market risk involved</small>
   </div>
 
-  <!-- ✅ BUTTON → redirect.html -->
-  <a class="btn-telegram" href="https://t.me/+Z9441bZklwYyMzBl" target="_blank">
-    View In Telegram
-  </a>
+  <a class="btn-telegram" href="https://t.me/+Z9441bZklwYyMzBl" onclick="trackSubscribe()">
+  View In Telegram
+</a>
+
+<script>
+function trackSubscribe(){
+  fbq('track', 'Subscribe');
+
+  setTimeout(function(){
+    window.open("https://t.me/+Z9441bZklwYyMzBl", "_blank");
+  }, 300); // 300ms delay for event fire
+}
+</script>
 
   <div class="timer-row">
     <div class="timer-pill" id="minutes">10 Min</div>
