@@ -1,120 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Mentor Mahira</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  font-family:system-ui;
-  background:linear-gradient(135deg,#020617,#0f172a);
-  color:#fff;
-  display:flex;
-  justify-content:center;
-}
-
-.wrap{
+.sk-box{
   max-width:420px;
-  width:100%;
-  padding:22px;
+  margin:30px auto;
+  background:linear-gradient(180deg,#ffffff,#f7f9ff);
+  padding:0 20px 22px;
+  border-radius:22px;
+  box-shadow:0 20px 45px rgba(0,0,0,.14);
+  font-family:Poppins,sans-serif;
   text-align:center;
 }
 
-.logo img{
-  width:90px;
-  border-radius:18px;
-  margin-bottom:12px;
+.sk-logo{
+  width:74px;height:74px;
+  margin:22px auto 14px;
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 8px 18px rgba(30,136,229,.35);
 }
+.sk-logo img{width:100%;height:100%;object-fit:cover}
 
-h1{
-  font-size:22px;
-  font-weight:800;
-  margin-bottom:8px;
-}
-
-.highlight{
-  color:#22c55e;
-}
-
-.sub{
-  color:#94a3b8;
-  margin-bottom:14px;
+.sk-box h1{
+  font-size:23px;
+  margin:8px 0 6px;
   font-weight:600;
 }
 
-.card{
-  background:rgba(255,255,255,0.05);
-  padding:16px;
-  border-radius:14px;
-  margin-bottom:16px;
-  backdrop-filter:blur(10px);
-}
-
-.point{
-  margin:8px 0;
+.sk-sub{
   font-size:14px;
+  color:#555;
+  margin-bottom:18px;
+  line-height:1.5;
 }
 
-.btn{
+.sk-list{
+  list-style:none;
+  padding:0;
+  margin:18px 0;
+}
+.sk-list li{
+  font-size:14px;
+  margin-bottom:10px;
+  color:#333;
+}
+
+/* Button */
+.sk-btn{
   display:block;
-  background:linear-gradient(90deg,#22c55e,#16a34a);
-  padding:14px;
-  border-radius:40px;
-  font-weight:800;
-  text-decoration:none;
+  margin-top:24px;
+  padding:16px;
+  background:linear-gradient(135deg,#1e88e5,#1565c0);
   color:#fff;
-  margin-top:10px;
-  box-shadow:0 0 20px rgba(34,197,94,0.5);
-  transition:0.3s;
-}
-
-.btn:hover{
-  transform:scale(1.05);
-}
-
-.live{
-  margin-top:10px;
-  font-size:14px;
-  color:#facc15;
-}
-
-.disclaimer{
-  font-size:12px;
-  color:#94a3b8;
-  margin-top:18px;
-  line-height:1.5;
-}
-
-/* FOOTER */
-.footer-links{
-  margin-top:22px;
-  font-size:13px;
-  line-height:1.8;
-  color:#94a3b8;
-}
-
-.footer-links a{
-  color:#22c55e;
   text-decoration:none;
+  border-radius:14px;
   font-weight:600;
+  letter-spacing:.3px;
+  transition:.3s ease;
+  box-shadow:0 12px 26px rgba(30,136,229,.45);
 }
 
-.footer-links a:hover{
-  text-decoration:underline;
+.sk-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 32px rgba(30,136,229,.55);
 }
 
-.fb-disclaimer{
-  margin-top:14px;
+.sk-note{
   font-size:11px;
-  color:#64748b;
-  line-height:1.5;
+  color:#666;
+  margin-top:14px;
+  line-height:1.6;
+}
+
+.sk-footer{
+  margin-top:18px;
+  font-size:11px;
+  color:#777;
+  line-height:1.7;
+}
+
+.sk-footer a{
+  color:#1e88e5;
+  text-decoration:none;
+  font-weight:500;
+}
+
+.sk-managed{
+  margin-top:6px;
+  font-size:11px;
+  color:#555;
 }
 </style>
 
- <!-- Meta Pixel Code -->
+<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -124,11 +107,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1477071827764821');
+fbq('init', '997082656194064');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1477071827764821&ev=PageView&noscript=1"
+src="https://www.facebook.com/tr?id=997082656194064&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
@@ -136,57 +119,51 @@ src="https://www.facebook.com/tr?id=1477071827764821&ev=PageView&noscript=1"
 
 <body>
 
-<div class="wrap">
+<div class="sk-box">
 
-  <div class="logo">
-    <img src="logo.jpeg" alt="logo">
+  <div class="sk-logo">
+    <img src="logo.jpeg" alt="S K Forex">
   </div>
 
-  <h1>📊 Learn Trading with <span class="highlight">Live Market Sessions</span></h1>
+  <h1>The Trading Mentor</h1>
 
-  <div class="sub">
-    Join a community focused on real-time market learning & analysis
+  <div class="sk-sub">
+    Master <strong>XAUUSD (Gold)</strong> using market structure & rule-based trading<br>
+    ✅ Pure education for serious traders
   </div>
 
-  <div class="card">
-    <div class="point">✔ Live market analysis sessions</div>
-    <div class="point">✔ Real-time trade explanations</div>
-    <div class="point">✔ Beginner-friendly guidance</div>
-    <div class="point">✔ Learn how markets actually work</div>
-  </div>
+  <ul class="sk-list">
+    <li>✔ Decode Gold (XAUUSD) market structure clearly</li>
+    <li>✔ Learn <strong>when NOT to trade</strong></li>
+    <li>✔ Rule-based system (Beginner → Intermediate)</li>
+    <li>✔ Focused trader community — no hype</li>
+  </ul>
 
-  <a class="btn" href="https://t.me/+wtKX2pUR4eM2Y2M1" target="_blank">
-    👉 Join Free Learning Community
+  <a class="sk-btn"
+     href="https://t.me/+wtKX2pUR4eM2Y2M1"
+     target="_blank"
+     rel="noopener noreferrer"
+     onclick="if(typeof fbq==='function'){fbq('track','Subscribe');}">
+     Continue to Private Telegram Classroom
   </a>
 
-  <div class="live">
-    🔴 Live sessions happen regularly inside the community
+  <div class="sk-note">
+    Trading involves risk. This community focuses on learning only.<br>
+    🔒 No spam • Leave anytime
   </div>
 
-  <p style="font-size:12px;color:#94a3b8;margin-top:10px;">
-    ⚠️ Educational purpose only • No financial advice
-  </p>
+  <div class="sk-footer">
+    <a href="https://elitepips.online/terms/" target="_blank">Terms</a> |
+    <a href="https://elitepips.online/privacy/" target="_blank">Privacy</a> |
+    <a href="https://elitepips.online/disclaimer/" target="_blank">Disclaimer</a>
 
-  <div class="disclaimer">
-    Trading involves risk and may not be suitable for everyone.<br>
-    We do not guarantee any results.
-  </div>
-
-  <!-- FOOTER -->
-  <div class="footer-links">
-    Managed By  
-    <a href="https://t.me/+ifc6dyg-xiA2ZGE1" target="_blank">Digital Ads Expert</a>
-    
-    <br><br>
-
-    <a href="https://ElitePips.online/privacy" target="_blank">Privacy Policy</a> • 
-    <a href="https://ElitePips.online/disclaimer" target="_blank">Disclaimer</a> • 
-    <a href="https://ElitePips.online/terms" target="_blank">Terms</a>
-  </div>
-
-  <div class="fb-disclaimer">
-    This site is not part of Facebook™ or Meta Platforms Inc.<br>
-    This site is NOT endorsed by Facebook™ in any way.
+    <div class="sk-managed">
+      Advertised by
+      <a href="https://t.me/+ifc6dyg-xiA2ZGE1" target="_blank">
+        <strong>Digital Ads Expert</strong>
+      </a>
+    </div>
+    <div>Not affiliated with Meta Platforms, Inc.</div>
   </div>
 
 </div>
