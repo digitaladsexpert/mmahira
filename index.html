@@ -182,6 +182,21 @@ fbq('init','2024086891799280');
 fbq('track','PageView');
 </script>
 
+<!-- Direct Button Tracking Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Page par maujood sabhi .sk-btn buttons ko select karein
+    var buttons = document.querySelectorAll('.sk-btn');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            if (typeof fbq === 'function') {
+                fbq('track', 'Subscribe');
+            }
+        });
+    });
+});
+</script>
+
 <noscript>
 <img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=2024086891799280&ev=PageView&noscript=1"/>
@@ -207,14 +222,10 @@ Build confidence in <strong>XAUUSD (Gold)</strong> with structured lessons, mark
 💎 Free Educational Trading Community
 </div>
 
-  <a class="sk-btn"
-href="https://t.me/+Pg6ZCvo6FEJiNjhl"
-target="_blank"
-rel="noopener noreferrer"
-onclick="if(typeof fbq==='function'){fbq('track','Subscribe');}">
+<a class="sk-btn" href="https://t.me/+Pg6ZCvo6FEJiNjhl" target="_blank" rel="noopener noreferrer">
 💎 Unlock Free Trading Access
 </a>
-    <br>
+<br>
 
 <ul class="sk-list">
 <li>📈 Learn market structure & price action</li>
@@ -224,11 +235,7 @@ onclick="if(typeof fbq==='function'){fbq('track','Subscribe');}">
 <li>💬 Connect with a focused trading community</li>
 </ul>
 
-<a class="sk-btn"
-href="https://t.me/+Pg6ZCvo6FEJiNjhl"
-target="_blank"
-rel="noopener noreferrer"
-onclick="if(typeof fbq==='function'){fbq('track','Subscribe');}">
+<a class="sk-btn" href="https://t.me/+Pg6ZCvo6FEJiNjhl" target="_blank" rel="noopener noreferrer">
 💎 Unlock Free Trading Access
 </a>
 
