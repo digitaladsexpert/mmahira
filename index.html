@@ -6,7 +6,25 @@
 <title>Inner Circle Community</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
+
+  <script>
+  // ---- Meta Pixel placeholder ----
+  // Replace YOUR_PIXEL_ID below with your actual Meta Pixel ID before publishing.
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  // fbq('init', '2024086891799280');
+  // fbq('track', 'PageView');
+
+  function trackClick(label){
+    // fbq('track', 'Subscribe', { content_name: label });
+    console.log('CTA clicked:', label);
+  }
+</script>
+  
+  <style>
   :root{
     --bg:#0B0E11;
     --surface:#12161C;
@@ -480,22 +498,7 @@
   <a href="#join" class="btn-primary" onclick="trackClick('float_cta')" style="box-shadow:0 8px 24px rgba(0,0,0,0.5);">Join Free on Telegram →</a>
 </div>
 
-<script>
-  // ---- Meta Pixel placeholder ----
-  // Replace YOUR_PIXEL_ID below with your actual Meta Pixel ID before publishing.
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-  document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  // fbq('init', '2024086891799280');
-  // fbq('track', 'PageView');
 
-  function trackClick(label){
-    // fbq('track', 'Subscribe', { content_name: label });
-    console.log('CTA clicked:', label);
-  }
-</script>
 
 </body>
 </html>
