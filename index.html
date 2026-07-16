@@ -4,501 +4,119 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inner Circle Community</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#0B0E11;color:#EDEAE2;font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
 
-  <script>
-  // ---- Meta Pixel placeholder ----
-  // Replace YOUR_PIXEL_ID below with your actual Meta Pixel ID before publishing.
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-  document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  // fbq('init', '2024086891799280');
-  // fbq('track', 'PageView');
+.wrap{max-width:560px;margin:0 auto;padding:0 20px;}
 
-  function trackClick(label){
-    // fbq('track', 'Subscribe', { content_name: label });
-    console.log('CTA clicked:', label);
-  }
-</script>
-  
-  <style>
-  :root{
-    --bg:#0B0E11;
-    --surface:#12161C;
-    --surface-2:#181D24;
-    --line:#262C34;
-    --gold:#C9A227;
-    --gold-bright:#E4C158;
-    --green:#2F6F4E;
-    --green-bright:#4C9A72;
-    --red:#A13D3D;
-    --text:#EDEAE2;
-    --muted:#8B929B;
-    --faint:#5C636C;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
-  .mono{font-family:'JetBrains Mono',monospace;}
-  a{text-decoration:none;color:inherit;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
-  img,svg{display:block;max-width:100%;}
+.topbar{border-bottom:1px solid #1E242B;padding:10px 20px;display:flex;justify-content:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#5C636C;}
+.dot{width:5px;height:5px;border-radius:50%;background:#4C9A72;margin-top:4px;}
 
-  /* ---------- ticker signature ---------- */
-  .ticker{
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    background:var(--surface);
-    overflow:hidden;
-    white-space:nowrap;
-    position:relative;
-  }
-  .ticker-track{
-    display:inline-flex;
-    align-items:center;
-    gap:0;
-    animation:scrollTicker 28s linear infinite;
-  }
-  .ticker-item{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 28px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:12.5px;
-    color:var(--muted);
-    border-right:1px solid var(--line);
-    white-space:nowrap;
-  }
-  .ticker-item .up{color:var(--green-bright);}
-  .ticker-item .down{color:#C97070;}
-  .candle{width:6px;height:16px;position:relative;display:inline-block;}
-  .candle::before{content:'';position:absolute;left:50%;top:-4px;width:1px;height:24px;background:currentColor;transform:translateX(-50%);}
-  .candle::after{content:'';position:absolute;inset:0;background:currentColor;border-radius:1px;}
-  @keyframes scrollTicker{
-    from{transform:translateX(0);}
-    to{transform:translateX(-50%);}
-  }
+.hero{padding:80px 20px 60px;text-align:center;}
+.badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#C9A227;border:1px solid rgba(201,162,39,0.3);padding:6px 14px;border-radius:20px;margin-bottom:28px;}
+.hero h1{font-size:36px;font-weight:800;line-height:1.15;margin-bottom:18px;letter-spacing:-0.02em;}
+.hero h1 span{color:#C9A227;}
+.hero p{color:#8B929B;font-size:15px;max-width:420px;margin:0 auto 36px;}
 
-  /* ---------- nav ---------- */
-  nav{
-    position:sticky;top:0;z-index:50;
-    background:rgba(11,14,17,0.88);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 24px;max-width:1120px;margin:0 auto;
-  }
-  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:19px;font-weight:600;}
-  .brand-mark{width:28px;height:28px;border:1.5px solid var(--gold);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:13px;font-weight:700;font-family:'JetBrains Mono',monospace;}
-  .nav-cta{
-    background:var(--gold);color:#0B0E11;padding:9px 18px;border-radius:3px;
-    font-weight:700;font-size:13.5px;letter-spacing:0.02em;
-  }
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.btn-tg{background:#29A9EB;color:#fff;padding:14px 28px;border-radius:6px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:opacity .15s;}
+.btn-tg:hover{opacity:.85;}
+.btn-yt{background:#FF0000;color:#fff;padding:14px 28px;border-radius:6px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:opacity .15s;}
+.btn-yt:hover{opacity:.85;}
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;
-    padding:76px 24px 64px;
-    background:
-      radial-gradient(ellipse at 20% -10%, rgba(201,162,39,0.12), transparent 55%),
-      radial-gradient(ellipse at 90% 10%, rgba(47,111,78,0.14), transparent 50%);
-    border-bottom:1px solid var(--line);
-  }
-  .hero-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;
-    color:var(--gold-bright);border:1px solid rgba(201,162,39,0.35);padding:6px 12px;border-radius:20px;
-    margin-bottom:22px;background:rgba(201,162,39,0.06);
-  }
-  .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--green-bright);box-shadow:0 0 0 3px rgba(76,154,114,0.2);}
-  .hero h1{font-size:44px;line-height:1.12;margin-bottom:20px;}
-  .hero h1 .accent{color:var(--gold-bright);font-style:italic;}
-  .hero p.lead{font-size:16.5px;color:var(--muted);max-width:480px;margin-bottom:32px;}
-  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
-  .btn-primary{
-    background:var(--gold);color:#0B0E11;padding:15px 26px;border-radius:3px;
-    font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;
-    transition:transform .15s ease, background .15s ease;
-  }
-  .btn-primary:hover{background:var(--gold-bright);transform:translateY(-1px);}
-  .btn-ghost{
-    border:1px solid var(--line);color:var(--text);padding:15px 24px;border-radius:3px;
-    font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;
-    transition:border-color .15s ease;
-  }
-  .btn-ghost:hover{border-color:var(--gold);}
-  .hero-meta{display:flex;gap:24px;flex-wrap:wrap;color:var(--faint);font-size:12.5px;font-family:'JetBrains Mono',monospace;}
-  .hero-meta span{display:flex;align-items:center;gap:6px;}
-  .hero-meta b{color:var(--muted);font-weight:600;}
+.stats{display:flex;justify-content:center;gap:32px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#5C636C;}
+.stats b{color:#8B929B;font-weight:600;}
 
-  /* chart card */
-  .chart-card{
-    background:var(--surface);border:1px solid var(--line);border-radius:6px;
-    padding:20px 18px 16px;position:relative;
-  }
-  .chart-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
-  .chart-top .pair{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;color:var(--text);}
-  .chart-top .price{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--green-bright);}
-  .chart-svg{width:100%;height:220px;display:block;}
-  .chart-foot{display:flex;justify-content:space-between;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);}
+.line{height:1px;background:#1E242B;max-width:560px;margin:0 auto;}
 
-  /* ---------- section shell ---------- */
-  section{padding:80px 24px;}
-  .section-head{max-width:640px;margin:0 auto 48px;text-align:center;}
-  .section-head .eyebrow{margin-bottom:14px;}
-  .section-head h2{font-size:32px;line-height:1.2;}
-  .section-head p{color:var(--muted);margin-top:14px;font-size:15.5px;}
+.section{padding:60px 20px;text-align:center;}
+.section h2{font-size:22px;font-weight:700;margin-bottom:24px;}
+.list{text-align:left;max-width:440px;margin:0 auto;}
+.list li{list-style:none;display:flex;gap:12px;padding:10px 0;font-size:14px;color:#8B929B;border-bottom:1px solid #1E242B;}
+.list li:last-child{border:none;}
+.list li .ico{color:#4C9A72;font-size:13px;margin-top:3px;flex-shrink:0;}
 
-  /* ---------- pain / who-for ---------- */
-  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .card{
-    background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:26px 24px;
-  }
-  .card .num{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:12px;letter-spacing:0.08em;margin-bottom:14px;}
-  .card h3{font-size:18px;margin-bottom:10px;font-weight:600;}
-  .card p{color:var(--muted);font-size:14.5px;}
+.final{text-align:center;padding:60px 20px 80px;}
+.final h2{font-size:22px;font-weight:700;margin-bottom:10px;}
+.final p{color:#8B929B;font-size:14px;margin-bottom:28px;}
+.final .ctas{margin-bottom:0;}
 
-  /* ---------- curriculum ---------- */
-  .curriculum{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .curr-list{display:flex;flex-direction:column;max-width:760px;margin:0 auto;}
-  .curr-item{
-    display:grid;grid-template-columns:64px 1fr;gap:20px;padding:26px 0;border-bottom:1px solid var(--line);
-  }
-  .curr-item:last-child{border-bottom:none;}
-  .curr-item .idx{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:13px;padding-top:3px;}
-  .curr-item h3{font-size:17.5px;margin-bottom:6px;font-weight:600;}
-  .curr-item p{color:var(--muted);font-size:14.5px;}
+.disc{padding:24px 20px;border-top:1px solid #1E242B;text-align:center;}
+.disc p{font-size:10.5px;color:#3A3F47;max-width:500px;margin:0 auto;line-height:1.7;}
 
-  /* ---------- mentor ---------- */
-  .mentor{display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center;max-width:1120px;margin:0 auto;}
-  .mentor-frame{
-    aspect-ratio:4/5;border-radius:6px;border:1px solid var(--line);
-    background:linear-gradient(155deg, var(--surface-2), var(--surface));
-    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
-  }
-  .mentor-frame::before{
-    content:'XAU/USD';position:absolute;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--faint);
-    top:16px;left:16px;letter-spacing:0.08em;
-  }
-  .mentor-frame .mono-glyph{font-family:'Fraunces',serif;font-size:120px;color:var(--gold);opacity:0.14;}
-  .mentor h2{font-size:28px;margin-bottom:16px;}
-  .mentor p{color:var(--muted);font-size:15px;margin-bottom:16px;}
-  .mentor-stats{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap;}
-  .mentor-stats div{border-left:2px solid var(--gold);padding-left:12px;}
-  .mentor-stats b{display:block;font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--text);}
-  .mentor-stats span{font-size:12.5px;color:var(--faint);}
+footer{padding:20px;text-align:center;font-size:11px;color:#3A3F47;}
 
-  /* ---------- what you get ---------- */
-  .benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:900px;margin:0 auto;}
-  .benefit{display:flex;gap:14px;padding:20px;background:var(--surface);border:1px solid var(--line);border-radius:6px;}
-  .benefit .check{
-    width:22px;height:22px;border-radius:50%;border:1px solid var(--green-bright);color:var(--green-bright);
-    display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px;
-  }
-  .benefit h4{font-size:15.5px;margin-bottom:4px;font-weight:600;}
-  .benefit p{color:var(--muted);font-size:13.5px;}
+.float{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:50;display:none;background:rgba(11,14,17,.92);backdrop-filter:blur(8px);border:1px solid #1E242B;border-radius:10px;padding:8px;gap:8px;}
+.float a{padding:10px 16px;border-radius:6px;font-weight:700;font-size:12px;display:flex;align-items:center;gap:6px;white-space:nowrap;}
 
-  /* ---------- testimonials ---------- */
-  .testimonials{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .t-card{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:24px;}
-  .t-card p{color:var(--text);font-size:14.5px;margin-bottom:16px;font-style:italic;}
-  .t-who{display:flex;align-items:center;gap:10px;}
-  .t-avatar{width:34px;height:34px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);}
-  .t-who b{font-size:13.5px;display:block;}
-  .t-who span{font-size:11.5px;color:var(--faint);}
-
-  /* ---------- pricing / cta ---------- */
-  .cta-section{text-align:center;}
-  .price-card{
-    max-width:440px;margin:0 auto;background:linear-gradient(180deg, var(--surface-2), var(--surface));
-    border:1px solid var(--gold);border-radius:8px;padding:40px 32px;position:relative;
-  }
-  .price-card::before{
-    content:'FREE COMMUNITY ACCESS';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
-    background:var(--gold);color:#0B0E11;font-family:'JetBrains Mono',monospace;font-size:10.5px;
-    font-weight:700;letter-spacing:0.08em;padding:5px 14px;border-radius:20px;white-space:nowrap;
-  }
-  .price-card h3{font-size:24px;margin:10px 0 8px;}
-  .price-card p{color:var(--muted);font-size:14px;margin-bottom:24px;}
-  .price-list{text-align:left;margin-bottom:28px;}
-  .price-list li{list-style:none;display:flex;gap:10px;padding:8px 0;font-size:14px;color:var(--text);}
-  .price-list li .tick{color:var(--green-bright);}
-  .btn-primary.full{width:100%;justify-content:center;}
-
-  /* ---------- disclaimer / footer ---------- */
-  .disclaimer{
-    background:var(--surface);border-top:1px solid var(--line);padding:36px 24px;
-  }
-  .disclaimer .wrap{max-width:760px;}
-  .disclaimer p{font-size:12px;color:var(--faint);line-height:1.7;margin-bottom:10px;}
-  footer{padding:32px 24px;text-align:center;color:var(--faint);font-size:12.5px;}
-  footer .brand{justify-content:center;margin-bottom:12px;}
-
-  .float-cta{
-    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:60;
-    display:none;
-  }
-  @media (max-width:860px){
-    .hero-inner{grid-template-columns:1fr;}
-    .grid-3{grid-template-columns:1fr;}
-    .benefits{grid-template-columns:1fr;}
-    .t-grid{grid-template-columns:1fr;}
-    .mentor{grid-template-columns:1fr;}
-    .hero h1{font-size:32px;}
-    .float-cta{display:block;}
-    body{padding-bottom:76px;}
-  }
+@media(max-width:600px){
+  .hero h1{font-size:28px;}
+  .float{display:flex;}
+  body{padding-bottom:72px;}
+}
 </style>
 </head>
 <body>
 
-<!-- ================= NAV ================= -->
-<nav>
-  <div class="nav-inner">
-    <div class="brand"><span class="brand-mark">TM</span> The Trading Mentor</div>
-    <a href="#join" class="nav-cta" onclick="trackClick('nav_cta')">Join Free</a>
-  </div>
-</nav>
+<div class="topbar"><span class="dot"></span> XAU/USD 2,401.75 &nbsp;·&nbsp; DXY 104.12 &nbsp;·&nbsp; London Session</div>
 
-<!-- ================= TICKER ================= -->
-<div class="ticker">
-  <div class="ticker-track">
-    <span class="ticker-item"><span class="candle up" style="color:#4C9A72"></span>XAU/USD <span class="up">2,398.40</span></span>
-    <span class="ticker-item"><span class="candle down" style="color:#C97070"></span>DXY <span class="down">104.12</span></span>
-    <span class="ticker-item"><span class="candle up" style="color:#4C9A72"></span>US10Y <span class="up">4.28%</span></span>
-    <span class="ticker-item"><span class="candle up" style="color:#4C9A72"></span>XAU/USD <span class="up">2,401.75</span></span>
-    <span class="ticker-item">SESSION: LONDON OPEN</span>
-    <span class="ticker-item"><span class="candle down" style="color:#C97070"></span>SILVER <span class="down">28.60</span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item"><span class="candle up" style="color:#4C9A72"></span>XAU/USD <span class="up">2,398.40</span></span>
-    <span class="ticker-item"><span class="candle down" style="color:#C97070"></span>DXY <span class="down">104.12</span></span>
-    <span class="ticker-item"><span class="candle up" style="color:#4C9A72"></span>US10Y <span class="up">4.28%</span></span>
-    <span class="ticker-item"><span class="candle up" style="color:#4C9A72"></span>XAU/USD <span class="up">2,401.75</span></span>
-    <span class="ticker-item">SESSION: LONDON OPEN</span>
-    <span class="ticker-item"><span class="candle down" style="color:#C97070"></span>SILVER <span class="down">28.60</span></span>
+<div class="hero">
+  <div class="badge">XAUUSD Education</div>
+  <h1>Learn Gold trading the <span>right</span> way</h1>
+  <p>Free XAUUSD education on YouTube. Daily structure breakdowns on Telegram. No signals, no fees — just learning.</p>
+  <div class="ctas">
+    <a href="https://t.me/+aNLZvHI4qrU4Yjc1" class="btn-tg" onclick="trackClick('tg_hero')"><i class="fa-brands fa-telegram"></i> Join Telegram</a>
+    <a href="https://youtube.com/@TheTradingMentor" class="btn-yt" onclick="trackClick('yt_hero')"><i class="fa-brands fa-youtube"></i> Watch on YouTube</a>
+  </div>
+  <div class="stats">
+    <span><b>25K+</b> members</span>
+    <span><b>6+</b> yrs experience</span>
+    <span><b>Free</b> to join</span>
   </div>
 </div>
 
-<!-- ================= HERO ================= -->
-<header class="hero">
-  <div class="hero-inner">
-    <div>
-      <div class="eyebrow"><span class="eyebrow-dot"></span> XAUUSD EDUCATION · TELEGRAM COMMUNITY</div>
-      <h1>Learn to read Gold like <span class="accent">structure</span>, not guesswork.</h1>
-      <p class="lead">The Trading Mentor is a free Telegram community for traders who want to actually understand XAUUSD price action — market structure, liquidity, and risk — instead of chasing tips.</p>
-      <div class="hero-ctas">
-        <a href="#join" class="btn-primary" onclick="trackClick('hero_primary')">Join the Telegram Channel →</a>
-        <a href="#curriculum" class="btn-ghost">See what's inside</a>
-      </div>
-      <div class="hero-meta">
-        <span><b>25,000+</b> members</span>
-        <span><b>6+ years</b> market experience</span>
-        <span><b>Free</b> to join</span>
-      </div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-top"><span class="pair">XAU/USD · 1H</span><span class="price">2,401.75</span></div>
-      <svg class="chart-svg" viewBox="0 0 400 220" preserveAspectRatio="none">
-        <line x1="0" y1="40" x2="400" y2="40" stroke="#1E242B" stroke-width="1"/>
-        <line x1="0" y1="90" x2="400" y2="90" stroke="#1E242B" stroke-width="1"/>
-        <line x1="0" y1="140" x2="400" y2="140" stroke="#1E242B" stroke-width="1"/>
-        <line x1="0" y1="190" x2="400" y2="190" stroke="#1E242B" stroke-width="1"/>
-        <!-- structure line -->
-        <polyline points="0,150 40,120 80,135 120,90 160,105 200,60 240,75 280,45 320,65 360,30 400,50" fill="none" stroke="#C9A227" stroke-width="1.4" stroke-dasharray="3,3" opacity="0.55"/>
-        <!-- candles -->
-        <g stroke-width="1.5">
-          <line x1="20" y1="130" x2="20" y2="170" stroke="#4C9A72"/><rect x="15" y="140" width="10" height="22" fill="#4C9A72"/>
-          <line x1="50" y1="110" x2="50" y2="150" stroke="#C97070"/><rect x="45" y="118" width="10" height="20" fill="#C97070"/>
-          <line x1="80" y1="120" x2="80" y2="160" stroke="#4C9A72"/><rect x="75" y="128" width="10" height="24" fill="#4C9A72"/>
-          <line x1="110" y1="90" x2="110" y2="135" stroke="#4C9A72"/><rect x="105" y="98" width="10" height="26" fill="#4C9A72"/>
-          <line x1="140" y1="95" x2="140" y2="130" stroke="#C97070"/><rect x="135" y="100" width="10" height="18" fill="#C97070"/>
-          <line x1="170" y1="70" x2="170" y2="110" stroke="#4C9A72"/><rect x="165" y="78" width="10" height="24" fill="#4C9A72"/>
-          <line x1="200" y1="50" x2="200" y2="95" stroke="#4C9A72"/><rect x="195" y="58" width="10" height="26" fill="#4C9A72"/>
-          <line x1="230" y1="65" x2="230" y2="100" stroke="#C97070"/><rect x="225" y="70" width="10" height="18" fill="#C97070"/>
-          <line x1="260" y1="45" x2="260" y2="85" stroke="#4C9A72"/><rect x="255" y="52" width="10" height="24" fill="#4C9A72"/>
-          <line x1="290" y1="35" x2="290" y2="70" stroke="#4C9A72"/><rect x="285" y="40" width="10" height="22" fill="#4C9A72"/>
-          <line x1="320" y1="45" x2="320" y2="80" stroke="#C97070"/><rect x="315" y="50" width="10" height="20" fill="#C97070"/>
-          <line x1="350" y1="25" x2="350" y2="65" stroke="#4C9A72"/><rect x="345" y="32" width="10" height="24" fill="#4C9A72"/>
-          <line x1="380" y1="20" x2="380" y2="55" stroke="#4C9A72"/><rect x="375" y="26" width="10" height="20" fill="#4C9A72"/>
-        </g>
-      </svg>
-      <div class="chart-foot"><span>Illustrative chart for educational context</span><span>Not a trade recommendation</span></div>
-    </div>
-  </div>
-</header>
+<div class="line"></div>
 
-<!-- ================= WHO IT'S FOR ================= -->
-<section id="who">
-  <div class="section-head">
-    <div class="eyebrow" style="display:inline-flex;"><span class="eyebrow-dot"></span> WHO THIS IS FOR</div>
-    <h2>Built for traders stuck between tips and theory</h2>
-    <p>If any of this sounds familiar, you're in the right place.</p>
-  </div>
-  <div class="wrap">
-    <div class="grid-3">
-      <div class="card">
-        <div class="num">01</div>
-        <h3>You've followed "signal" channels</h3>
-        <p>And realised you never actually learned why a trade worked — you just copied an entry and exit.</p>
-      </div>
-      <div class="card">
-        <div class="num">02</div>
-        <h3>Gold moves feel random to you</h3>
-        <p>You can read candles, but you can't yet read the structure — where liquidity sits, where price is likely to react.</p>
-      </div>
-      <div class="card">
-        <div class="num">03</div>
-        <h3>You want a process, not a promise</h3>
-        <p>You're done chasing "guaranteed" setups and ready to build a repeatable, risk-first approach to XAUUSD.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="section">
+  <h2>What you'll learn</h2>
+  <ul class="list">
+    <li><span class="ico"><i class="fa-solid fa-check"></i></span> Market structure — trend, range, reversal zones on Gold</li>
+    <li><span class="ico"><i class="fa-solid fa-check"></i></span> Liquidity concepts — where institutional interest sits</li>
+    <li><span class="ico"><i class="fa-solid fa-check"></i></span> Session context — London, NY, Asian behaviour on XAUUSD</li>
+    <li><span class="ico"><i class="fa-solid fa-check"></i></span> Risk management — position sizing, capital protection</li>
+    <li><span class="ico"><i class="fa-solid fa-check"></i></span> Daily live chart breakdowns with the "why" explained</li>
+  </ul>
+</div>
 
-<!-- ================= CURRICULUM ================= -->
-<section class="curriculum" id="curriculum">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow" style="display:inline-flex;"><span class="eyebrow-dot"></span> INSIDE THE CHANNEL</div>
-      <h2>What you'll actually learn</h2>
-      <p>Structured, ongoing education — not one-off calls.</p>
-    </div>
-    <div class="curr-list">
-      <div class="curr-item">
-        <div class="idx">I.</div>
-        <div><h3>Market structure fundamentals</h3><p>How to identify trend, range, and reversal zones on XAUUSD across multiple timeframes.</p></div>
-      </div>
-      <div class="curr-item">
-        <div class="idx">II.</div>
-        <div><h3>Liquidity & order-flow concepts</h3><p>Where institutional interest tends to sit, and how to avoid common retail traps.</p></div>
-      </div>
-      <div class="curr-item">
-        <div class="idx">III.</div>
-        <div><h3>Session-based context</h3><p>How London, New York, and Asian sessions typically shape gold's daily behaviour.</p></div>
-      </div>
-      <div class="curr-item">
-        <div class="idx">IV.</div>
-        <div><h3>Risk & position-sizing frameworks</h3><p>Practical rules for protecting capital — the part most channels skip entirely.</p></div>
-      </div>
-      <div class="curr-item">
-        <div class="idx">V.</div>
-        <div><h3>Live daily breakdowns</h3><p>Real-time chart walkthroughs explaining the "why" behind each move, for learning purposes.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="line"></div>
 
-<!-- ================= MENTOR ================= -->
-<section id="mentor">
-  <div class="mentor">
-    <div class="mentor-frame"><span class="mono-glyph">TM</span></div>
-    <div>
-      <div class="eyebrow" style="display:inline-flex;"><span class="eyebrow-dot"></span> ABOUT THE MENTOR</div>
-      <h2>Years in the charts, not just talking about them</h2>
-      <p>The Trading Mentor was started to give retail traders in India a place to actually learn XAUUSD price action — structure, liquidity, and risk management — in plain Hindi-English, without the noise of paid "sure-shot" groups.</p>
-      <p>Every session is built around one idea: trading is a skill you develop, not a signal you receive.</p>
-      <div class="mentor-stats">
-        <div><b>6+ yrs</b><span>Market experience</span></div>
-        <div><b>25,000+</b><span>Community members</span></div>
-        <div><b>XAUUSD</b><span>Primary focus instrument</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= BENEFITS ================= -->
-<section id="benefits" style="border-top:1px solid var(--line);">
-  <div class="section-head">
-    <div class="eyebrow" style="display:inline-flex;"><span class="eyebrow-dot"></span> MEMBER ACCESS</div>
-    <h2>What you get when you join</h2>
-  </div>
-  <div class="benefits">
-    <div class="benefit"><div class="check">✓</div><div><h4>Daily XAUUSD structure breakdowns</h4><p>Understand what's happening on the chart and why, before the session starts.</p></div></div>
-    <div class="benefit"><div class="check">✓</div><div><h4>Weekly educational sessions</h4><p>Live walkthroughs of concepts — liquidity, structure, risk — explained from scratch.</p></div></div>
-    <div class="benefit"><div class="check">✓</div><div><h4>Active trader community</h4><p>Discuss charts, ask questions, and learn alongside others on the same path.</p></div></div>
-    <div class="benefit"><div class="check">✓</div><div><h4>No-cost access</h4><p>Core community and education are free — no hidden joining fee.</p></div></div>
-  </div>
-</section>
-
-<!-- ================= TESTIMONIALS ================= -->
-<section class="testimonials">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow" style="display:inline-flex;"><span class="eyebrow-dot"></span> COMMUNITY VOICES</div>
-      <h2>What members say</h2>
-      <p style="font-size:12px;">Individual experiences vary. Trading involves risk — see disclaimer below.</p>
-    </div>
-    <div class="t-grid">
-      <div class="t-card">
-        <p>"First place that actually explained WHY price reacted at a level, not just 'buy here, sell here.'"</p>
-        <div class="t-who"><div class="t-avatar">R</div><div><b>Rohit S.</b><span>Member since 2025</span></div></div>
-      </div>
-      <div class="t-card">
-        <p>"The risk management session alone changed how I size my trades. Wish I'd found this earlier."</p>
-        <div class="t-who"><div class="t-avatar">A</div><div><b>Anjali M.</b><span>Member since 2025</span></div></div>
-      </div>
-      <div class="t-card">
-        <p>"Finally a Gold-focused group that teaches structure instead of just dropping calls all day."</p>
-        <div class="t-who"><div class="t-avatar">V</div><div><b>Vikram P.</b><span>Member since 2026</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CTA / JOIN ================= -->
-<section class="cta-section" id="join">
-  <div class="section-head">
-    <div class="eyebrow" style="display:inline-flex;"><span class="eyebrow-dot"></span> JOIN TODAY</div>
-    <h2>Start learning Gold the right way</h2>
-  </div>
-  <div class="price-card">
-    <h3>The Trading Mentor</h3>
-    <p>Join 25,000+ traders · Free Telegram community</p>
-    <ul class="price-list">
-      <li><span class="tick">✓</span> Daily XAUUSD structure breakdowns</li>
-      <li><span class="tick">✓</span> Weekly live education sessions</li>
-      <li><span class="tick">✓</span> Risk management frameworks</li>
-      <li><span class="tick">✓</span> Active trader community</li>
-    </ul>
-    <a href="https://t.me/+aNLZvHI4qrU4Yjc1" class="btn-primary full" onclick="trackClick('final_cta')">Join on Telegram →</a>
-  </div>
-</section>
-
-<!-- ================= DISCLAIMER ================= -->
-<div class="disclaimer">
-  <div class="wrap">
-    <p><strong>Risk disclosure:</strong> Trading in forex, gold (XAUUSD), and other financial instruments involves substantial risk of loss and is not suitable for every investor. Past performance and any examples shown are for educational purposes only and are not indicative of future results. The Trading Mentor provides educational content and market commentary — it does not provide personalised investment advice, and nothing here should be construed as a recommendation to buy or sell any financial instrument.</p>
-    <p>No profits, income, or specific outcomes are guaranteed. You are solely responsible for your own trading decisions. Please consult a licensed financial advisor and trade only with capital you can afford to lose.</p>
+<div class="final">
+  <h2>Start learning today</h2>
+  <p>Join 25,000+ traders learning Gold structure for free.</p>
+  <div class="ctas">
+    <a href="https://t.me/+aNLZvHI4qrU4Yjc1" class="btn-tg" onclick="trackClick('tg_final')"><i class="fa-brands fa-telegram"></i> Telegram Channel</a>
+    <a href="https://www.youtube.com/@tradingmentor22" class="btn-yt" onclick="trackClick('yt_final')"><i class="fa-brands fa-youtube"></i> YouTube Channel</a>
   </div>
 </div>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-  <div class="brand" style="display:flex;"><span class="brand-mark">TM</span> The Trading Mentor</div>
-  <p>©️ 2026 The Trading Mentor. Educational content only. Not financial advice.</p>
-</footer>
-
-<!-- Mobile floating CTA -->
-<div class="float-cta">
-  <a href="#join" class="btn-primary" onclick="trackClick('float_cta')" style="box-shadow:0 8px 24px rgba(0,0,0,0.5);">Join Free on Telegram →</a>
+<div class="disc">
+  <p>Risk disclosure: Trading forex, gold (XAUUSD), and other instruments involves substantial risk of loss. Content here is for educational purposes only — not financial advice. No profits or outcomes are guaranteed. Trade only with capital you can afford to lose.</p>
 </div>
 
+<footer>© 2025 The Trading Mentor · Educational content only</footer>
 
+<div class="float">
+  <a href="https://t.me/+aNLZvHI4qrU4Yjc1" class="btn-tg" style="padding:10px 14px;font-size:11px;" onclick="trackClick('tg_float')"><i class="fa-brands fa-telegram"></i> TG</a>
+  <a href="https://www.youtube.com/@tradingmentor22" class="btn-yt" style="padding:10px 14px;font-size:11px;" onclick="trackClick('yt_float')"><i class="fa-brands fa-youtube"></i> YT</a>
+</div>
 
+<script>
+function trackClick(l){console.log('CTA:',l);}
+</script>
 </body>
 </html>
