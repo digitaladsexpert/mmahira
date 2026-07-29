@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inner Circle</title>
+<title>The Trading Mentor - Master Gold Trading</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -327,7 +327,7 @@ a{text-decoration:none;color:inherit;}
 .disclaimer{
   position:relative;z-index:2;
   text-align:center;
-  padding:24px 24px 40px;
+  padding:24px 24px 20px;
   max-width:520px;
 }
 .disclaimer p{
@@ -336,6 +336,94 @@ a{text-decoration:none;color:inherit;}
   max-width:480px;
   margin:0 auto;
   line-height:1.8;
+}
+
+/* ===== FOOTER - ADS MANAGED BY ===== */
+.ads-footer{
+  position:relative;
+  z-index:2;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  padding:0 24px 32px;
+  animation:fadeIn 1s .6s cubic-bezier(.22,1,.36,1) both;
+}
+
+.ads-box{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 22px;
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(201,162,39,.02));
+  border:1px solid rgba(201,162,39,.18);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:all .25s cubic-bezier(.4,0,.2,1);
+  position:relative;
+  overflow:hidden;
+  user-select:none;
+}
+
+.ads-box::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(201,162,39,.08),transparent);
+  opacity:0;
+  transition:opacity .25s;
+  pointer-events:none;
+}
+
+.ads-box:hover{
+  border-color:rgba(201,162,39,.35);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(201,162,39,.12);
+}
+
+.ads-box:hover::before{
+  opacity:1;
+}
+
+.ads-label{
+  font-size:12px;
+  color:#6B7280;
+  font-weight:500;
+  letter-spacing:.02em;
+  position:relative;
+  z-index:1;
+}
+
+.ads-brand{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:13px;
+  font-weight:700;
+  background:linear-gradient(135deg,#C9A227,#E8C547);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative;
+  z-index:1;
+  transition:all .2s;
+}
+
+.ads-brand i{
+  font-size:13px;
+  background:linear-gradient(135deg,#C9A227,#E8C547);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  transition:transform .25s;
+}
+
+.ads-box:hover .ads-brand i{
+  transform:translateX(2px);
+}
+
+.ads-box:hover .ads-brand{
+  filter:brightness(1.15);
 }
 
 /* Mobile Floating Bar */
@@ -391,6 +479,10 @@ a{text-decoration:none;color:inherit;}
   .container{padding:80px 20px 40px;}
   .cta-group{flex-direction:column;width:100%;}
   .cta-btn{width:100%;justify-content:center;}
+  .ads-footer{padding:0 20px 28px;}
+  .ads-box{padding:10px 18px;}
+  .ads-label{font-size:11px;}
+  .ads-brand{font-size:12px;}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -467,6 +559,17 @@ a{text-decoration:none;color:inherit;}
   <p>Risk Disclosure: Trading forex and gold (XAUUSD) involves substantial risk of loss. All content is for educational purposes only and does not constitute financial advice. Past performance is not indicative of future results. Trade only with capital you can afford to lose.</p>
 </div>
 
+<!-- Ads Managed By Footer -->
+<div class="ads-footer">
+  <a href="https://t.me/+wq8so6-ni4A3ZThl" target="_blank" rel="noopener noreferrer" class="ads-box" onclick="trackClick('ads_footer')">
+    <span class="ads-label">Ads Managed By</span>
+    <span class="ads-brand">
+      Digital Ads Expert
+      <i class="fas fa-arrow-up-right-from-square"></i>
+    </span>
+  </a>
+</div>
+
 <div class="mobile-bar">
   <a href="#" class="bar-tg" onclick="openTelegram('tg_mobile'); return false;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="">
@@ -495,20 +598,16 @@ function openTelegram(location) {
   const isMobile = isMobileDevice();
   
   if (isMobile) {
-    // Try deeplink first on mobile
     const startTime = Date.now();
     
-    // Create hidden iframe to attempt deeplink
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = TELEGRAM_DEEPLINK;
     document.body.appendChild(iframe);
     
-    // Set timeout to check if app opened
     setTimeout(() => {
       const timeDiff = Date.now() - startTime;
       
-      // If page is still visible after 2.5 seconds, deeplink likely failed
       if (!document.hidden && timeDiff < 3000) {
         console.log('Deeplink failed, falling back to web link');
         window.location.href = TELEGRAM_WEBLINK;
@@ -516,11 +615,11 @@ function openTelegram(location) {
         console.log('Deeplink successful');
       }
       
-      // Clean up iframe
-      document.body.removeChild(iframe);
+      if (document.body.contains(iframe)) {
+        document.body.removeChild(iframe);
+      }
     }, 2500);
     
-    // Also try direct navigation as backup
     setTimeout(() => {
       if (!document.hidden) {
         window.location.href = TELEGRAM_WEBLINK;
@@ -528,7 +627,6 @@ function openTelegram(location) {
     }, 100);
     
   } else {
-    // Desktop: use web link directly
     console.log('Desktop detected, using web link');
     window.open(TELEGRAM_WEBLINK, '_blank');
   }
@@ -550,7 +648,7 @@ function trackClick(location) {
   console.log('CTA clicked:', location, 'at', new Date().toISOString());
   
   if (typeof fbq !== 'undefined') {
-    fbq('track', 'Subscribe', {
+    fbq('track', 'Lead', {
       content_name: location,
       content_category: 'CTA_Click'
     });
@@ -568,7 +666,6 @@ document.addEventListener('touchend', function(e) {
   document.lastTouchEnd = now;
 }, false);
 
-// Handle visibility change to detect if app opened
 document.addEventListener('visibilitychange', function() {
   if (document.hidden) {
     console.log('Page hidden - app likely opened');
