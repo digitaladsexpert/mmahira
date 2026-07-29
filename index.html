@@ -648,7 +648,7 @@ function trackClick(location) {
   console.log('CTA clicked:', location, 'at', new Date().toISOString());
   
   if (typeof fbq !== 'undefined') {
-    fbq('track', 'Lead', {
+    fbq('track', 'Subscribe', {
       content_name: location,
       content_category: 'CTA_Click'
     });
