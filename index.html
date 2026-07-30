@@ -1,678 +1,1095 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INNER CIRCLE</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Inner Circle Community | Gold Trading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4D03F;
+            --gold-dark: #B8860B;
+            --dark: #0A0A0F;
+            --dark-card: #12121A;
+            --dark-border: #1E1E2E;
+            --text: #E8E8EC;
+            --text-muted: #8B8B9A;
+            --green: #22C55E;
+        }
 
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '997082656194064');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=997082656194064&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  background:#0A0E1A;
-  color:#FFFFFF;
-  font-family:'Inter',sans-serif;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  overflow-x:hidden;
-  position:relative;
-}
-a{text-decoration:none;color:inherit;}
+        html { scroll-behavior: smooth; }
 
-/* ===== PREMIUM BACKGROUND ===== */
-.gradient-bg{
-  position:fixed;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse at top left, rgba(201,162,39,.15) 0%, transparent 50%),
-    radial-gradient(ellipse at bottom right, rgba(41,169,235,.1) 0%, transparent 50%),
-    radial-gradient(ellipse at center, rgba(201,162,39,.05) 0%, transparent 70%);
-  animation:bgShift 20s ease-in-out infinite alternate;
-}
-@keyframes bgShift{
-  0%{opacity:.8;}
-  100%{opacity:1;}
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
 
-.mesh-grid{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(201,162,39,.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,162,39,.03) 1px, transparent 1px);
-  background-size:50px 50px;
-  mask-image:radial-gradient(ellipse at center, black 30%, transparent 70%);
-}
+        /* Background glow */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.glow-orb{
-  position:fixed;border-radius:50%;
-  filter:blur(100px);
-  pointer-events:none;z-index:0;
-}
-.orb-1{
-  width:500px;height:500px;
-  background:radial-gradient(circle,rgba(201,162,39,.2),transparent 70%);
-  top:-15%;left:-10%;
-  animation:orbFloat1 25s ease-in-out infinite;
-}
-.orb-2{
-  width:400px;height:400px;
-  background:radial-gradient(circle,rgba(41,169,235,.15),transparent 70%);
-  bottom:-10%;right:-8%;
-  animation:orbFloat2 30s ease-in-out infinite;
-}
-@keyframes orbFloat1{
-  0%,100%{transform:translate(0,0) scale(1);}
-  50%{transform:translate(80px,60px) scale(1.1);}
-}
-@keyframes orbFloat2{
-  0%,100%{transform:translate(0,0) scale(1);}
-  50%{transform:translate(-60px,-50px) scale(1.15);}
-}
+        .bg-glow::before {
+            content: '';
+            position: absolute;
+            top: -20%; left: -20%;
+            width: 140%; height: 60%;
+            background: radial-gradient(circle at 50% 30%, rgba(212,175,55,0.08) 0%, transparent 60%);
+            animation: glowMove 8s ease-in-out infinite;
+        }
 
-/* ===== MAIN CONTENT ===== */
-.container{
-  position:relative;z-index:2;
-  text-align:center;
-  padding:60px 24px;
-  max-width:600px;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  animation:fadeIn 1s cubic-bezier(.22,1,.36,1) both;
-}
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(40px);}
-  to{opacity:1;transform:translateY(0);}
-}
+        @keyframes glowMove {
+            0%, 100% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(-20px); opacity: 1; }
+        }
 
-/* Logo Section */
-.logo-wrapper{
-  position:relative;
-  margin-bottom:48px;
-  animation:logoReveal .8s .2s cubic-bezier(.34,1.56,.64,1) both;
-}
-@keyframes logoReveal{
-  from{opacity:0;transform:scale(.6) rotate(-10deg);}
-  to{opacity:1;transform:scale(1) rotate(0deg);}
-}
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-.logo-ring{
-  position:absolute;
-  width:140px;height:140px;
-  border-radius:50%;
-  border:2px solid rgba(201,162,39,.3);
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  animation:ringPulse 3s ease-in-out infinite;
-  pointer-events:none;
-}
-.logo-ring::before{
-  content:'';position:absolute;inset:-10px;
-  border-radius:50%;
-  border:1px solid rgba(201,162,39,.15);
-  animation:ringPulse 3s ease-in-out infinite .5s;
-}
-@keyframes ringPulse{
-  0%,100%{transform:scale(1);opacity:.5;}
-  50%{transform:scale(1.1);opacity:0;}
-}
+        /* Header */
+        header {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--dark-border);
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-.logo-img{
-  width:110px;height:110px;
-  border-radius:28px;
-  object-fit:cover;
-  border:4px solid rgba(201,162,39,.4);
-  box-shadow:
-    0 0 60px rgba(201,162,39,.3),
-    0 20px 60px rgba(0,0,0,.5);
-  background:linear-gradient(135deg,#C9A227,#A6841A);
-  position:relative;
-  z-index:1;
-}
-.logo-fallback{
-  width:110px;height:110px;
-  border-radius:28px;
-  background:linear-gradient(135deg,#C9A227,#A6841A);
-  display:none;
-  align-items:center;justify-content:center;
-  font-weight:900;font-size:32px;color:#fff;
-  border:4px solid rgba(201,162,39,.4);
-  box-shadow:
-    0 0 60px rgba(201,162,39,.3),
-    0 20px 60px rgba(0,0,0,.5);
-  position:relative;
-  z-index:1;
-}
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* Typography */
-.headline{
-  font-size:clamp(32px,8vw,52px);
-  font-weight:900;
-  line-height:1.1;
-  letter-spacing:-0.04em;
-  margin-bottom:20px;
-  background:linear-gradient(135deg,#FFFFFF 0%,#C9A227 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  animation:textGlow 3s ease-in-out infinite alternate;
-}
-@keyframes textGlow{
-  0%{filter:brightness(1);}
-  100%{filter:brightness(1.2);}
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
 
-.headline .accent{
-  background:linear-gradient(135deg,#C9A227,#E8C547);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  position:relative;
-  display:inline-block;
-}
-.headline .accent::after{
-  content:'';position:absolute;
-  bottom:4px;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,#C9A227,#E8C547);
-  border-radius:2px;
-  opacity:.4;
-}
+        .logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark);
+        }
 
-.subheadline{
-  color:#9CA3AF;
-  font-size:clamp(15px,4vw,18px);
-  line-height:1.7;
-  margin-bottom:48px;
-  max-width:480px;
-  font-weight:400;
-}
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
 
-/* CTA Buttons */
-.cta-group{
-  display:flex;
-  gap:16px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:40px;
-}
+        .logo-text span { color: var(--gold); }
 
-.cta-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:12px;
-  padding:18px 36px;
-  border-radius:16px;
-  font-weight:700;
-  font-size:16px;
-  transition:all .2s cubic-bezier(.4,0,.2,1);
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-  border:none;
-}
-.cta-btn:active{transform:scale(.96);}
+        .header-cta {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
 
-.cta-btn img{
-  width:24px;height:24px;
-  border-radius:6px;
-  object-fit:contain;
-  flex-shrink:0;
-  pointer-events:none;
-}
+        /* Hero */
+        .hero {
+            padding: 40px 0 30px;
+            text-align: center;
+        }
 
-.cta-primary{
-  background:linear-gradient(135deg,#29A9EB,#1E88C7);
-  color:#fff;
-  box-shadow:
-    0 8px 32px rgba(41,169,235,.4),
-    0 0 0 1px rgba(41,169,235,.2),
-    inset 0 1px 0 rgba(255,255,255,.2);
-}
-.cta-primary:hover{
-  transform:translateY(-4px);
-  box-shadow:
-    0 12px 48px rgba(41,169,235,.5),
-    0 0 0 1px rgba(41,169,235,.3),
-    inset 0 1px 0 rgba(255,255,255,.2);
-}
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
 
-.cta-btn::before{
-  content:'';position:absolute;
-  top:0;left:-100%;
-  width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
-  animation:shimmer 4s ease-in-out infinite;
-  pointer-events:none;
-}
-@keyframes shimmer{
-  0%{left:-100%;}
-  20%{left:100%;}
-  100%{left:100%;}
-}
+        .badge-dot {
+            width: 6px; height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
 
-/* Stats Section */
-.stats{
-  display:flex;
-  gap:32px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:32px;
-  animation:fadeIn 1s .4s cubic-bezier(.22,1,.36,1) both;
-}
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
 
-.stat-item{
-  text-align:center;
-}
-.stat-number{
-  font-size:clamp(24px,6vw,32px);
-  font-weight:900;
-  background:linear-gradient(135deg,#C9A227,#E8C547);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  margin-bottom:4px;
-}
-.stat-label{
-  font-size:12px;
-  color:#6B7280;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #fff 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-/* Badge */
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 20px;
-  border-radius:40px;
-  background:rgba(201,162,39,.1);
-  border:1px solid rgba(201,162,39,.2);
-  font-size:13px;
-  font-weight:600;
-  color:#C9A227;
-  margin-bottom:24px;
-  animation:fadeIn 1s .3s cubic-bezier(.22,1,.36,1) both;
-}
-.badge i{
-  font-size:14px;
-}
+        .hero h1 .gold {
+            color: var(--gold);
+            -webkit-text-fill-color: var(--gold);
+        }
 
-/* Disclaimer */
-.disclaimer{
-  position:relative;z-index:2;
-  text-align:center;
-  padding:24px 24px 20px;
-  max-width:520px;
-}
-.disclaimer p{
-  font-size:11px;
-  color:#4B5563;
-  max-width:480px;
-  margin:0 auto;
-  line-height:1.8;
-}
+        .hero p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 0 auto 24px;
+            font-weight: 300;
+            padding: 0 10px;
+        }
 
-/* ===== FOOTER - ADS MANAGED BY ===== */
-.ads-footer{
-  position:relative;
-  z-index:2;
-  width:100%;
-  display:flex;
-  justify-content:center;
-  padding:0 24px 32px;
-  animation:fadeIn 1s .6s cubic-bezier(.22,1,.36,1) both;
-}
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 10px 30px rgba(212,175,55,0.25);
+            margin-bottom: 12px;
+            width: 100%;
+            justify-content: center;
+            max-width: 320px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
 
-.ads-box{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 22px;
-  border-radius:14px;
-  background:linear-gradient(135deg,rgba(201,162,39,.06),rgba(201,162,39,.02));
-  border:1px solid rgba(201,162,39,.18);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  transition:all .25s cubic-bezier(.4,0,.2,1);
-  position:relative;
-  overflow:hidden;
-  user-select:none;
-}
+        .hero-cta:active {
+            transform: scale(0.97);
+        }
 
-.ads-box::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,rgba(201,162,39,.08),transparent);
-  opacity:0;
-  transition:opacity .25s;
-  pointer-events:none;
-}
+        .hero-cta svg { width: 18px; height: 18px; }
 
-.ads-box:hover{
-  border-color:rgba(201,162,39,.35);
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(201,162,39,.12);
-}
+        .hero-subtext {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
 
-.ads-box:hover::before{
-  opacity:1;
-}
+        /* Live Ticker */
+        .ticker-section {
+            padding: 0 0 30px;
+        }
 
-.ads-label{
-  font-size:12px;
-  color:#6B7280;
-  font-weight:500;
-  letter-spacing:.02em;
-  position:relative;
-  z-index:1;
-}
+        .ticker-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 20px 16px;
+        }
 
-.ads-brand{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  font-size:13px;
-  font-weight:700;
-  background:linear-gradient(135deg,#C9A227,#E8C547);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  position:relative;
-  z-index:1;
-  transition:all .2s;
-}
+        .ticker-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--dark-border);
+        }
 
-.ads-brand i{
-  font-size:13px;
-  background:linear-gradient(135deg,#C9A227,#E8C547);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  transition:transform .25s;
-}
+        .ticker-row:last-child { border-bottom: none; }
 
-.ads-box:hover .ads-brand i{
-  transform:translateX(2px);
-}
+        .ticker-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
 
-.ads-box:hover .ads-brand{
-  filter:brightness(1.15);
-}
+        .ticker-right {
+            text-align: right;
+        }
 
-/* Mobile Floating Bar */
-.mobile-bar{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:50;
-  display:none;
-  background:rgba(10,14,26,.95);
-  backdrop-filter:blur(20px);
-  border:1px solid rgba(201,162,39,.2);
-  border-radius:20px;
-  padding:8px;
-  gap:8px;
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.5),
-    0 0 0 1px rgba(201,162,39,.1);
-}
-.mobile-bar a{
-  padding:12px 24px;
-  border-radius:14px;
-  font-weight:700;
-  font-size:13px;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  white-space:nowrap;
-  transition:all .15s;
-  user-select:none;
-  -webkit-tap-highlight-color:transparent;
-}
-.mobile-bar a:active{transform:scale(.95);}
-.mobile-bar a img{
-  width:20px;height:20px;
-  border-radius:5px;
-  object-fit:contain;
-  pointer-events:none;
-  filter:brightness(0) invert(1);
-}
-.mobile-bar .bar-tg{
-  background:linear-gradient(135deg,#29A9EB,#1E88C7);
-}
-.mobile-bar .bar-yt{
-  background:linear-gradient(135deg,#FF0000,#CC0000);
-}
+        .ticker-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+        }
 
-@media(max-width:640px){
-  .mobile-bar{display:flex;}
-  body{padding-bottom:90px;}
-  .container{padding:80px 20px 40px;}
-  .cta-group{flex-direction:column;width:100%;}
-  .cta-btn{width:100%;justify-content:center;}
-  .ads-footer{padding:0 20px 28px;}
-  .ads-box{padding:10px 18px;}
-  .ads-label{font-size:11px;}
-  .ads-brand{font-size:12px;}
-}
+        .ticker-change {
+            font-size: 11px;
+            font-weight: 600;
+        }
 
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:.01ms!important;
-  }
-}
-</style>
+        .ticker-change.up { color: var(--green); }
+        .ticker-change.down { color: #EF4444; }
+
+        /* Features */
+        .features {
+            padding: 30px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            padding: 18px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:active {
+            transform: scale(0.98);
+            border-color: rgba(212,175,55,0.3);
+        }
+
+        .feature-icon {
+            width: 44px; height: 44px;
+            min-width: 44px;
+            background: rgba(212,175,55,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .feature-text h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .feature-text p {
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Stats */
+        .stats-section {
+            padding: 30px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .stat-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            padding: 20px 12px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .stat-card p {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 30px 0;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .step {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            padding: 18px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .step-number {
+            width: 38px; height: 38px;
+            min-width: 38px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--dark);
+        }
+
+        .step-content h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 0 20px;
+            border-top: 1px solid var(--dark-border);
+            margin-top: 20px;
+        }
+
+        .footer-ads-box {
+            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(184,134,11,0.04));
+            border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 14px;
+            padding: 22px 18px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-ads-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .footer-ads-box .ads-label {
+            display: inline-block;
+            background: rgba(212,175,55,0.15);
+            color: var(--gold);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .footer-ads-box h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .footer-ads-box h4 span {
+            color: var(--gold);
+            display: block;
+            margin-top: 4px;
+        }
+
+        .footer-ads-box p {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .footer-ads-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            width: 100%;
+            justify-content: center;
+            max-width: 280px;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .footer-ads-link:active {
+            transform: scale(0.97);
+        }
+
+        .footer-ads-link svg { width: 16px; height: 16px; }
+
+        .footer-bottom {
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        /* Sticky bottom CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0; left: 0;
+            width: 100%;
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--dark-border);
+            padding: 12px 20px;
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+        }
+
+        .sticky-cta a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            padding: 14px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 -5px 30px rgba(212,175,55,0.2);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .sticky-cta a:active {
+            transform: scale(0.98);
+        }
+
+        .sticky-cta svg { width: 18px; height: 18px; }
+
+        /* Link Choice Modal */
+        .link-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            align-items: flex-end;
+            justify-content: center;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .link-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .modal-sheet {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 20px 20px 0 0;
+            padding: 24px 20px 28px;
+            width: 100%;
+            max-width: 480px;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--dark-border);
+            border-radius: 2px;
+            margin: 0 auto 18px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--dark-border);
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            font-size: 14px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .modal-option:active {
+            transform: scale(0.98);
+            border-color: rgba(212,175,55,0.4);
+        }
+
+        .modal-option.primary {
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(184,134,11,0.08));
+            border-color: rgba(212,175,55,0.3);
+        }
+
+        .modal-option-icon {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 12px;
+            background: rgba(212,175,55,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .modal-option-text {
+            flex: 1;
+        }
+
+        .modal-option-text strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .modal-option-text span {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .modal-option-arrow {
+            color: var(--gold);
+            font-size: 18px;
+        }
+
+        .modal-close {
+            margin-top: 14px;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--dark-border);
+            color: var(--text-muted);
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '997082656194064');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=997082656194064&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
 </head>
 <body>
+    <div class="bg-glow"></div>
 
-<!-- Background layers -->
-<div class="gradient-bg" aria-hidden="true"></div>
-<div class="mesh-grid" aria-hidden="true"></div>
-<div class="glow-orb orb-1" aria-hidden="true"></div>
-<div class="glow-orb orb-2" aria-hidden="true"></div>
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">IC</div>
+                <div class="logo-text">Inner Circle <span>Community</span></div>
+            </a>
+            <button class="header-cta" onclick="openTelegram('main')">Join</button>
+        </div>
+    </header>
 
-<!-- Content -->
-<div class="container">
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="badge fade-in">
+                <span class="badge-dot"></span>
+                Live Gold Market Updates
+            </div>
+            <h1 class="fade-in">Master Gold Trading With <span class="gold">Inner Circle</span></h1>
+            <p class="fade-in">Join thousands of traders receiving daily XAUUSD analysis, market insights, and trading signals — completely free on Telegram.</p>
+            <button class="hero-cta fade-in" onclick="openTelegram('main')">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                Join Free on Telegram
+            </button>
+            <p class="hero-subtext fade-in">✓ No credit card &nbsp;|&nbsp; ✓ Unsubscribe anytime</p>
+        </div>
+    </section>
 
-  <div class="badge">
-    <i class="fas fa-crown"></i>
-    Premium Trading Education
-  </div>
+    <!-- Live Ticker -->
+    <section class="ticker-section">
+        <div class="container">
+            <div class="ticker-card fade-in">
+                <div class="ticker-row">
+                    <div class="ticker-label">🥇 Gold (XAU/USD)</div>
+                    <div class="ticker-right">
+                        <div class="ticker-value" id="gold-price">2,412.50</div>
+                        <div class="ticker-change up" id="gold-change">+12.30 (+0.51%)</div>
+                    </div>
+                </div>
+                <div class="ticker-row">
+                    <div class="ticker-label">📈 Daily High</div>
+                    <div class="ticker-right">
+                        <div class="ticker-value">2,418.75</div>
+                        <div class="ticker-change up">+0.26%</div>
+                    </div>
+                </div>
+                <div class="ticker-row">
+                    <div class="ticker-label">📉 Daily Low</div>
+                    <div class="ticker-right">
+                        <div class="ticker-value">2,398.20</div>
+                        <div class="ticker-change down">-0.59%</div>
+                    </div>
+                </div>
+                <div class="ticker-row">
+                    <div class="ticker-label">🟢 Market Status</div>
+                    <div class="ticker-right">
+                        <div class="ticker-value" style="color: var(--green); font-size: 14px;">● Open</div>
+                        <div class="ticker-change">London Session</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="logo-wrapper">
-    <div class="logo-ring"></div>
-    <img
-      id="brandImg"
-      class="logo-img"
-      src="logo.jpeg"
-      alt="The Trading Mentor"
-      onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex';"
-    >
-    <div class="logo-fallback" id="logoFallback">TTM</div>
-  </div>
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>What You Get</h2>
+                <p>Everything to stay ahead in gold market</p>
+            </div>
+            <div class="features-list">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <h3>Daily Market Analysis</h3>
+                        <p>In-depth XAUUSD technical & fundamental analysis every trading day.</p>
+                    </div>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-text">
+                        <h3>Clear Entry & Exit Points</h3>
+                        <p>Precise entry, stop-loss, and take-profit levels for every setup.</p>
+                    </div>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-text">
+                        <h3>Real-Time Alerts</h3>
+                        <p>Instant notifications when high-probability setups form.</p>
+                    </div>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📚</div>
+                    <div class="feature-text">
+                        <h3>Trading Education</h3>
+                        <p>Learn price action, risk management & trading psychology.</p>
+                    </div>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-text">
+                        <h3>Active Community</h3>
+                        <p>Connect with fellow gold traders and grow together.</p>
+                    </div>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-text">
+                        <h3>Risk Management Focus</h3>
+                        <p>Every signal comes with proper risk-reward ratios.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <h1 class="headline">
-    Master <span class="accent">Gold Trading</span><br>
-    Like a Pro
-  </h1>
-  
-  <p class="subheadline">
-    Join 25,000+ traders learning XAUUSD strategies. Daily market analysis, structure breakdowns, and proven techniques — completely free.
-  </p>
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid fade-in">
+                <div class="stat-card">
+                    <h3 class="counter" data-target="15000">0</h3>
+                    <p>Active Traders</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="counter" data-target="5">0</h3>
+                    <p>Signals Daily</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="counter" data-target="24">0</h3>
+                    <p>Hours Coverage</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="counter" data-target="100">0</h3>
+                    <p>Percent Free</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="cta-group">
-    <a href="#" class="cta-btn cta-primary" onclick="openTelegram('tg_main'); return false;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
-      Join Free Community
-    </a>
-  </div>
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Get Started</h2>
+                <p>Join in less than 60 seconds</p>
+            </div>
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Click Join Button</h4>
+                        <p>Tap "Join Free on Telegram" to open our channel directly.</p>
+                    </div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Join the Channel</h4>
+                        <p>Hit "Join Channel" in Telegram to get instant access.</p>
+                    </div>
+                </div>
+                <div class="step fade-in">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Receive Signals</h4>
+                        <p>Turn on notifications and get clear entry, SL & TP levels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="stats">
-    <div class="stat-item">
-      <div class="stat-number">25K+</div>
-      <div class="stat-label">Active Traders</div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-ads-box fade-in">
+                <span class="ads-label">Advertisement</span>
+                <h4>FOR ADS PROMOTION CONTACT<span>DIGITAL ADS EXPERT</span></h4>
+                <p>Promote your brand with us. Reach thousands of active traders daily.</p>
+                <button class="footer-ads-link" onclick="openTelegram('ads')">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                    Contact Digital Ads Expert
+                </button>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Inner Circle Community. All rights reserved.<br><a href="#" onclick="openTelegram('main'); return false;">@InnerCircleCommunity</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Bottom CTA -->
+    <div class="sticky-cta">
+        <a onclick="openTelegram('main')">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            Join Free on Telegram
+        </a>
     </div>
-    <div class="stat-item">
-      <div class="stat-number">Daily</div>
-      <div class="stat-label">Market Analysis</div>
+
+    <!-- Link Choice Modal -->
+    <div class="link-modal" id="linkModal">
+        <div class="modal-sheet">
+            <div class="modal-handle"></div>
+            <div class="modal-title" id="modalTitle">Open in Telegram</div>
+            <div class="modal-subtitle" id="modalSubtitle">Choose how you want to open the link</div>
+            <div class="modal-options">
+                <button class="modal-option primary" id="deepLinkBtn">
+                    <div class="modal-option-icon">📱</div>
+                    <div class="modal-option-text">
+                        <strong>Open in Telegram App</strong>
+                        <span>Recommended · Opens directly in app</span>
+                    </div>
+                    <div class="modal-option-arrow">›</div>
+                </button>
+                <button class="modal-option" id="webLinkBtn">
+                    <div class="modal-option-icon">🌐</div>
+                    <div class="modal-option-text">
+                        <strong>Open in Browser</strong>
+                        <span>Opens Telegram Web version</span>
+                    </div>
+                    <div class="modal-option-arrow">›</div>
+                </button>
+            </div>
+            <button class="modal-close" onclick="closeModal()">Cancel</button>
+        </div>
     </div>
-    <div class="stat-item">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Free Education</div>
-    </div>
-  </div>
 
-</div>
+    <script>
+        // Link configurations
+        const LINKS = {
+            main: {
+                web: 'https://t.me/+aNLZvHI4qrU4Yjc1',
+                deep: 'tg://join?invite=aNLZvHI4qrU4Yjc1',
+                title: 'Join Inner Circle Community',
+                subtitle: 'Choose how you want to join our channel'
+            },
+            ads: {
+                web: 'https://t.me/+JP96Y2n0U8xiZWI1',
+                deep: 'tg://join?invite=JP96Y2n0U8xiZWI1',
+                title: 'Contact Digital Ads Expert',
+                subtitle: 'Choose how you want to reach us'
+            }
+        };
 
-<div class="disclaimer">
-  <p>Risk Disclosure: Trading forex and gold (XAUUSD) involves substantial risk of loss. All content is for educational purposes only and does not constitute financial advice. Past performance is not indicative of future results. Trade only with capital you can afford to lose.</p>
-</div>
+        let currentLinkType = 'main';
 
-<!-- Ads Managed By Footer -->
-<div class="ads-footer">
-  <a href="https://t.me/+wq8so6-ni4A3ZThl" target="_blank" rel="noopener noreferrer" class="ads-box" onclick="trackClick('ads_footer')">
-    <span class="ads-label">Ads Managed By</span>
-    <span class="ads-brand">
-      Digital Ads Expert
-      <i class="fas fa-arrow-up-right-from-square"></i>
-    </span>
-  </a>
-</div>
+        // Open modal
+        function openTelegram(type) {
+            currentLinkType = type;
+            const config = LINKS[type];
+            document.getElementById('modalTitle').textContent = config.title;
+            document.getElementById('modalSubtitle').textContent = config.subtitle;
+            document.getElementById('linkModal').classList.add('active');
 
-<div class="mobile-bar">
-  <a href="#" class="bar-tg" onclick="openTelegram('tg_mobile'); return false;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="">
-    Join Telegram
-  </a>
-  <a href="https://www.youtube.com/@tradingmentor22" class="bar-yt" onclick="trackClick('yt_mobile')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/YouTube_logo.svg" alt="">
-    Watch YouTube
-  </a>
-</div>
+            // Track click event
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', { content_name: 'telegram_join_' + type });
+            }
+        }
 
-<script>
-// Telegram links configuration
-const TELEGRAM_DEEPLINK = 'tg://join?invite=aNLZvHI4qrU4Yjc1';
-const TELEGRAM_WEBLINK = 'https://t.me/+aNLZvHI4qrU4Yjc1';
+        // Close modal
+        function closeModal() {
+            document.getElementById('linkModal').classList.remove('active');
+        }
 
-// Detect if device is mobile
-function isMobileDevice() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
+        // Smart open - tries deep link, falls back to web
+        function smartOpen() {
+            const config = LINKS[currentLinkType];
+            closeModal();
 
-// Open Telegram with deeplink fallback
-function openTelegram(location) {
-  trackClick(location);
-  
-  const isMobile = isMobileDevice();
-  
-  if (isMobile) {
-    const startTime = Date.now();
-    
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = TELEGRAM_DEEPLINK;
-    document.body.appendChild(iframe);
-    
-    setTimeout(() => {
-      const timeDiff = Date.now() - startTime;
-      
-      if (!document.hidden && timeDiff < 3000) {
-        console.log('Deeplink failed, falling back to web link');
-        window.location.href = TELEGRAM_WEBLINK;
-      } else {
-        console.log('Deeplink successful');
-      }
-      
-      if (document.body.contains(iframe)) {
-        document.body.removeChild(iframe);
-      }
-    }, 2500);
-    
-    setTimeout(() => {
-      if (!document.hidden) {
-        window.location.href = TELEGRAM_WEBLINK;
-      }
-    }, 100);
-    
-  } else {
-    console.log('Desktop detected, using web link');
-    window.open(TELEGRAM_WEBLINK, '_blank');
-  }
-}
+            // Try deep link first
+            const startTime = Date.now();
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = config.deep;
+            document.body.appendChild(iframe);
 
-// Debounce function to prevent rapid fake clicks
-let lastClickTime = {};
-const CLICK_DELAY = 500;
+            // Listen for visibility change (if app opened, page becomes hidden)
+            let appOpened = false;
+            const handleVisibility = () => {
+                if (document.hidden) {
+                    appOpened = true;
+                }
+            };
+            document.addEventListener('visibilitychange', handleVisibility);
 
-function trackClick(location) {
-  const now = Date.now();
-  
-  if (lastClickTime[location] && (now - lastClickTime[location]) < CLICK_DELAY) {
-    console.log('Blocked rapid click:', location);
-    return false;
-  }
-  
-  lastClickTime[location] = now;
-  console.log('CTA clicked:', location, 'at', new Date().toISOString());
-  
-  if (typeof fbq !== 'undefined') {
-    fbq('track', 'Subscribe', {
-      content_name: location,
-      content_category: 'CTA_Click'
-    });
-  }
-  
-  return true;
-}
+            // Fallback to web link after timeout
+            setTimeout(() => {
+                document.removeEventListener('visibilitychange', handleVisibility);
+                document.body.removeChild(iframe);
+                if (!appOpened && (Date.now() - startTime) < 3000) {
+                    window.location.href = config.web;
+                }
+            }, 1500);
+        }
 
-// Prevent double-tap zoom on mobile
-document.addEventListener('touchend', function(e) {
-  const now = Date.now();
-  if (now - (document.lastTouchEnd || 0) < 300) {
-    e.preventDefault();
-  }
-  document.lastTouchEnd = now;
-}, false);
+        // Direct open web link
+        function openWebLink() {
+            const config = LINKS[currentLinkType];
+            closeModal();
+            window.open(config.web, '_blank');
+        }
 
-document.addEventListener('visibilitychange', function() {
-  if (document.hidden) {
-    console.log('Page hidden - app likely opened');
-  }
-});
+        // Attach event listeners
+        document.getElementById('deepLinkBtn').addEventListener('click', smartOpen);
+        document.getElementById('webLinkBtn').addEventListener('click', openWebLink);
 
-window.pageLoadTime = Date.now();
-</script>
+        // Close modal on backdrop click
+        document.getElementById('linkModal').addEventListener('click', (e) => {
+            if (e.target.id === 'linkModal') closeModal();
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 1500;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current).toLocaleString();
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target.toLocaleString() + (target === 100 ? '%' : '+');
+                        }
+                    };
+
+                    updateCounter();
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
+
+        // Live gold price simulation
+        const goldPriceEl = document.getElementById('gold-price');
+        const goldChangeEl = document.getElementById('gold-change');
+        let basePrice = 2412.50;
+
+        setInterval(() => {
+            const change = (Math.random() - 0.5) * 2;
+            basePrice += change;
+            const changePercent = ((change / basePrice) * 100).toFixed(2);
+
+            goldPriceEl.textContent = basePrice.toFixed(2);
+            goldChangeEl.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + ' (' + (change >= 0 ? '+' : '') + changePercent + '%)';
+            goldChangeEl.className = 'ticker-change ' + (change >= 0 ? 'up' : 'down');
+        }, 5000);
+    </script>
 </body>
 </html>
