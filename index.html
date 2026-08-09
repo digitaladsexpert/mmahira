@@ -1,713 +1,837 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Inner Circle Community</title>
-    <meta name="description" content="Free XAUUSD educational community — daily analysis, price action & risk management.">
-    <meta property="og:title" content="Inner Circle Community | Free Gold Education">
-    <meta property="og:description" content="Learn gold market dynamics with daily educational analysis.">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#050505">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inner Circle Community</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3162058067317960');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3162058067317960&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 
-    <style>
-        :root {
-            --gold: #D4AF37;
-            --gold-light: #F4D03F;
-            --gold-dark: #B8860B;
-            --gold-glow: rgba(212,175,55,0.15);
-            --dark: #050505;
-            --dark-alt: #0a0a0a;
-            --card: rgba(255,255,255,0.03);
-            --card-hover: rgba(255,255,255,0.06);
-            --border: rgba(255,255,255,0.08);
-            --border-hover: rgba(212,175,55,0.3);
-            --text: #ffffff;
-            --text-secondary: #9ca3af;
-            --text-muted: #6b7280;
-            --green: #22c55e;
-            --red: #ef4444;
-        }
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; }
+:root{
+  --gold-1:#FACC15;
+  --gold-2:#EAB308;
+  --gold-3:#CA8A04;
+  --gold-glow:rgba(250,204,21,.15);
+  --gold-glow-strong:rgba(250,204,21,.3);
+  --dark-1:#030303;
+  --dark-2:#050505;
+  --dark-3:#0A0A0A;
+  --dark-4:#111111;
+  --dark-5:#1A1A1A;
+  --text-primary:#FFFFFF;
+  --text-secondary:#A1A1AA;
+  --text-dim:#52525B;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--dark);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-            min-height: 100dvh;
-            overflow-x: hidden;
-            padding-bottom: 90px;
-            touch-action: manipulation;
-            -webkit-font-smoothing: antialiased;
-        }
+html{scroll-behavior:smooth}
 
-        /* ── Ambient Background ── */
-        .ambient {
-            position: fixed; inset: 0;
-            pointer-events: none; z-index: 0; overflow: hidden;
-        }
-        .ambient-orb {
-            position: absolute; border-radius: 50%; filter: blur(120px);
-        }
-        .ambient-orb--gold {
-            width: 300px; height: 300px; top: -80px; left: 50%;
-            transform: translateX(-50%);
-            background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
-            animation: orbFloat 6s ease-in-out infinite;
-        }
-        .ambient-orb--subtle {
-            width: 200px; height: 200px; bottom: 20%; right: -60px;
-            background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
-            animation: orbFloat 8s ease-in-out infinite reverse;
-        }
-        @keyframes orbFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-20px); }
-        }
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--dark-1);
+  color:var(--text-primary);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow-x:hidden;
+  padding:20px 16px;
+  position:relative;
+}
 
-        /* ── Grain Overlay ── */
-        .grain {
-            position: fixed; inset: 0; pointer-events: none; z-index: 1;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            background-size: 128px 128px;
-        }
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(250,204,21,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250,204,21,.03) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,#000 30%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,#000 30%,transparent 100%);
+  pointer-events:none;
+  z-index:0;
+}
 
-        /* ── Layout ── */
-        .page { max-width: 430px; margin: 0 auto; position: relative; z-index: 2; }
-        .px { padding-left: 20px; padding-right: 20px; }
+.particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
 
-        /* ── Header ── */
-        .header {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(5,5,5,0.85);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 0;
-        }
-        .header__inner {
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-        .logo__icon {
-            width: 36px; height: 36px; border-radius: 10px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 13px;
-            color: var(--dark); letter-spacing: 0.5px;
-        }
-        .logo__name {
-            font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 14px;
-            text-transform: uppercase; letter-spacing: 0.5px; color: var(--text);
-        }
-        .logo__name em {
-            font-style: normal; color: var(--gold);
-        }
-        .header__btn {
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark); border: none; cursor: pointer;
-            padding: 8px 16px; border-radius: 50px;
-            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            transition: transform 0.15s;
-        }
-        .header__btn:active { transform: scale(0.95); }
+.particle{
+  position:absolute;
+  width:3px;height:3px;
+  background:var(--gold-1);
+  border-radius:50%;
+  opacity:0;
+  animation:floatUp linear infinite;
+}
 
-        /* ── Hero ── */
-        .hero { padding: 40px 0 28px; text-align: center; }
+@keyframes floatUp{
+  0%{opacity:0;transform:translateY(100vh) scale(0)}
+  10%{opacity:.6}
+  90%{opacity:.6}
+  100%{opacity:0;transform:translateY(-10vh) scale(1)}
+}
 
-        .live-badge {
-            display: inline-flex; align-items: center; gap: 7px;
-            background: var(--gold-glow); border: 1px solid rgba(212,175,55,0.2);
-            padding: 6px 14px; border-radius: 50px;
-            font-size: 10px; font-weight: 600; color: var(--gold);
-            text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-        .live-badge__dot {
-            width: 6px; height: 6px; background: var(--green);
-            border-radius: 50%; position: relative;
-        }
-        .live-badge__dot::after {
-            content: ''; position: absolute; inset: -3px;
-            border-radius: 50%; background: var(--green);
-            animation: livePing 1.5s cubic-bezier(0,0,0.2,1) infinite;
-        }
-        @keyframes livePing {
-            0% { transform: scale(1); opacity: 0.6; }
-            100% { transform: scale(2.5); opacity: 0; }
-        }
+.glow-orb{
+  position:fixed;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(250,204,21,.06) 0%,transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:0;
+  animation:orbPulse 4s ease-in-out infinite;
+}
 
-        .hero__title {
-            font-family: 'Oswald', sans-serif; font-weight: 700;
-            font-size: 32px; line-height: 1.05;
-            text-transform: uppercase; letter-spacing: -0.5px;
-            margin-bottom: 14px;
-        }
-        .hero__title .gold {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+@keyframes orbPulse{
+  0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
+}
 
-        .hero__desc {
-            font-size: 14px; font-weight: 300; color: var(--text-secondary);
-            line-height: 1.65; margin-bottom: 28px; padding: 0 4px;
-        }
+.card{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:440px;
+  background:rgba(5,5,5,.8);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(250,204,21,.08);
+  border-radius:24px;
+  padding:36px 28px 28px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.03),
+    0 25px 60px -12px rgba(0,0,0,.8),
+    0 0 80px -20px rgba(250,204,21,.1);
+  animation:cardIn .8s cubic-bezier(.16,1,.3,1) both;
+}
 
-        .hero__cta {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; max-width: 320px; margin: 0 auto 12px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark); border: none; cursor: pointer;
-            padding: 16px 28px; border-radius: 60px;
-            font-family: 'Oswald', sans-serif; font-weight: 600;
-            font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px;
-            box-shadow: 0 0 40px -10px rgba(212,175,55,0.5);
-            transition: transform 0.15s, box-shadow 0.3s;
-            position: relative; overflow: hidden;
-        }
-        .hero__cta::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-            transform: translateX(-100%);
-            animation: shimmer 3s ease-in-out infinite 1.5s;
-        }
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            20% { transform: translateX(100%); }
-            100% { transform: translateX(100%); }
-        }
-        .hero__cta:active { transform: scale(0.97); }
-        .hero__cta svg { width: 18px; height: 18px; flex-shrink: 0; }
+@keyframes cardIn{
+  0%{opacity:0;transform:translateY(30px) scale(.96)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
 
-        .hero__trust {
-            font-size: 11px; color: var(--text-muted); font-weight: 400;
-        }
-        .hero__trust span { margin: 0 4px; }
+.card::before{
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:25px;
+  background:conic-gradient(from var(--shimmer-angle,0deg),transparent 60%,rgba(250,204,21,.25) 75%,transparent 90%);
+  z-index:-1;
+  opacity:0;
+  transition:opacity .5s;
+}
 
-        /* ── Gold Price Ticker ── */
-        .ticker {
-            margin: 0 0 32px; overflow: hidden;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 14px 0;
-        }
-        .ticker__track {
-            display: flex; gap: 24px; width: max-content;
-            animation: tickerScroll 20s linear infinite;
-        }
-        @keyframes tickerScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .ticker__item {
-            display: flex; align-items: center; gap: 8px;
-            white-space: nowrap; font-size: 12px; font-weight: 500;
-        }
-        .ticker__item .symbol { color: var(--gold); font-weight: 700; font-family: 'Oswald', sans-serif; }
-        .ticker__item .price { color: var(--text); }
-        .ticker__item .change { font-size: 11px; font-weight: 600; }
-        .ticker__item .change.up { color: var(--green); }
-        .ticker__item .change.down { color: var(--red); }
-        .ticker__dot {
-            width: 3px; height: 3px; background: var(--text-muted);
-            border-radius: 50%; flex-shrink: 0;
-        }
+.card:hover::before{
+  opacity:1;
+  animation:shimmer 3s linear infinite;
+}
 
-        /* ── Section Common ── */
-        .section { padding: 0 0 32px; }
-        .section__head { text-align: center; margin-bottom: 20px; }
-        .section__label {
-            font-size: 10px; font-weight: 600; color: var(--gold);
-            text-transform: uppercase; letter-spacing: 2px;
-            margin-bottom: 6px; display: block;
-        }
-        .section__title {
-            font-family: 'Oswald', sans-serif; font-weight: 700;
-            font-size: 22px; text-transform: uppercase; letter-spacing: 0.5px;
-        }
+@keyframes shimmer{
+  to{--shimmer-angle:360deg}
+}
 
-        /* ── Features Grid ── */
-        .features__grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-        }
-        .feature-card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 20px 14px; text-align: center;
-            transition: all 0.3s ease; position: relative; overflow: hidden;
-        }
-        .feature-card::after {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 0%, var(--gold-glow) 0%, transparent 70%);
-            opacity: 0; transition: opacity 0.3s;
-        }
-        .feature-card:active { transform: scale(0.97); border-color: var(--border-hover); }
-        .feature-card:active::after { opacity: 1; }
-        .feature-card__icon {
-            font-size: 28px; margin-bottom: 10px;
-            position: relative; z-index: 1;
-        }
-        .feature-card__title {
-            font-family: 'Oswald', sans-serif; font-size: 13px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.3px;
-            margin-bottom: 4px; position: relative; z-index: 1;
-        }
-        .feature-card__desc {
-            font-size: 11px; color: var(--text-muted); line-height: 1.4;
-            position: relative; z-index: 1;
-        }
+@property --shimmer-angle{
+  syntax:'<angle>';
+  initial-value:0deg;
+  inherits:false;
+}
 
-        /* ── Stats ── */
-        .stats__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .stat-card {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 20px 12px; text-align: center;
-            position: relative; overflow: hidden;
-        }
-        .stat-card::before {
-            content: ''; position: absolute; top: 0; left: 50%;
-            transform: translateX(-50%); width: 60%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-        .stat-card__number {
-            font-family: 'Oswald', sans-serif; font-weight: 700;
-            font-size: 28px; color: var(--gold); line-height: 1;
-            margin-bottom: 4px;
-        }
-        .stat-card__label {
-            font-size: 10px; color: var(--text-muted);
-            text-transform: uppercase; letter-spacing: 1px; font-weight: 500;
-        }
+/* ===== LOGO ===== */
+.logo-wrap{
+  position:relative;
+  width:88px;height:88px;
+  margin:0 auto 20px;
+  animation:logoIn 1s .2s cubic-bezier(.16,1,.3,1) both;
+}
 
-        /* ── Steps ── */
-        .steps { display: flex; flex-direction: column; gap: 10px; }
-        .step {
-            display: flex; align-items: center; gap: 14px;
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 14px; padding: 16px 16px;
-            transition: all 0.3s;
-        }
-        .step:active { border-color: var(--border-hover); background: var(--card-hover); }
-        .step__num {
-            width: 36px; height: 36px; min-width: 36px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Oswald', sans-serif; font-weight: 700;
-            font-size: 16px; color: var(--dark);
-        }
-        .step__text {
-            font-size: 13px; font-weight: 500; color: var(--text-secondary);
-        }
-        .step__text strong { color: var(--text); font-weight: 600; }
+@keyframes logoIn{
+  0%{opacity:0;transform:scale(.5) rotate(-10deg)}
+  100%{opacity:1;transform:scale(1) rotate(0)}
+}
 
-        /* ── Testimonial ── */
-        .testimonial {
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: 16px; padding: 20px; position: relative;
-        }
-        .testimonial__quote {
-            font-size: 13px; font-weight: 300; color: var(--text-secondary);
-            line-height: 1.7; margin-bottom: 14px; font-style: italic;
-        }
-        .testimonial__quote::before {
-            content: '"'; display: block;
-            font-family: 'Oswald', sans-serif; font-size: 40px;
-            color: var(--gold); line-height: 0.8; margin-bottom: 8px;
-            font-style: normal;
-        }
-        .testimonial__author {
-            display: flex; align-items: center; gap: 10px;
-        }
-        .testimonial__avatar {
-            width: 32px; height: 32px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Oswald', sans-serif; font-weight: 700;
-            font-size: 12px; color: var(--dark);
-        }
-        .testimonial__name { font-size: 12px; font-weight: 600; }
-        .testimonial__role { font-size: 10px; color: var(--text-muted); }
+.logo-ring{
+  position:absolute;
+  inset:-4px;
+  border-radius:50%;
+  border:2px solid transparent;
+  background:conic-gradient(from 0deg,var(--gold-1),var(--gold-3),var(--gold-1)) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  animation:ringRotate 4s linear infinite;
+}
 
-        /* ── Footer ── */
-        .footer { border-top: 1px solid var(--border); padding-top: 28px; padding-bottom: 16px; }
+@keyframes ringRotate{
+  to{transform:rotate(360deg)}
+}
 
-        .ads-box {
-            background: linear-gradient(135deg, rgba(212,175,55,0.06), rgba(184,134,11,0.02));
-            border: 1px solid rgba(212,175,55,0.2); border-radius: 16px;
-            padding: 22px 18px; text-align: center;
-            position: relative; overflow: hidden; margin-bottom: 24px;
-        }
-        .ads-box::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent 10%, var(--gold) 50%, transparent 90%);
-        }
-        .ads-box::after {
-            content: ''; position: absolute; bottom: -40px; right: -40px;
-            width: 120px; height: 120px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
-        }
-        .ads-box__label {
-            display: inline-block;
-            background: rgba(212,175,55,0.12); color: var(--gold);
-            padding: 3px 10px; border-radius: 50px;
-            font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
-            text-transform: uppercase; margin-bottom: 10px;
-            position: relative; z-index: 1;
-        }
-        .ads-box__title {
-            font-family: 'Oswald', sans-serif; font-size: 15px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.5px;
-            margin-bottom: 2px; position: relative; z-index: 1;
-        }
-        .ads-box__title em {
-            font-style: normal; color: var(--gold); display: block; font-size: 16px;
-        }
-        .ads-box__desc {
-            font-size: 12px; color: var(--text-muted); margin: 8px 0 14px;
-            position: relative; z-index: 1;
-        }
-        .ads-box__btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            width: 100%; max-width: 280px; margin: 0 auto;
-            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark); border: none; cursor: pointer;
-            padding: 13px 20px; border-radius: 50px;
-            font-family: 'Oswald', sans-serif; font-weight: 600;
-            font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
-            position: relative; z-index: 1;
-            transition: transform 0.15s;
-        }
-        .ads-box__btn:active { transform: scale(0.97); }
-        .ads-box__btn svg { width: 15px; height: 15px; }
+.logo-inner{
+  width:88px;height:88px;
+  border-radius:50%;
+  overflow:hidden;
+  background:var(--dark-3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
 
-        .footer__links {
-            text-align: center; margin-bottom: 12px;
-        }
-        .footer__links a {
-            color: var(--text-muted); text-decoration: none; font-size: 11px;
-            margin: 0 6px; transition: color 0.2s;
-        }
-        .footer__links a:active { color: var(--gold); }
+.logo-text{
+  font-weight:800;
+  font-size:28px;
+  color:var(--gold-1);
+  letter-spacing:-1px;
+  line-height:1;
+}
 
-        .footer__copy {
-            text-align: center; font-size: 10px; color: var(--text-muted);
-            line-height: 1.7;
-        }
-        .footer__copy a { color: var(--gold); text-decoration: none; }
+.logo-glow{
+  position:absolute;
+  inset:-12px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(250,204,21,.2) 0%,transparent 70%);
+  z-index:-1;
+  animation:glowPulse 3s ease-in-out infinite;
+}
 
-        /* ── Sticky Bottom CTA ── */
-        .sticky-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%; z-index: 99;
-            background: rgba(5,5,5,0.9);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border-top: 1px solid var(--border);
-            padding: 10px 16px;
-        }
-        .sticky-bar__inner { max-width: 430px; margin: 0 auto; }
-        .sticky-bar__btn {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            width: 100%; background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-            color: var(--dark); border: none; cursor: pointer;
-            padding: 15px 20px; border-radius: 60px;
-            font-family: 'Oswald', sans-serif; font-weight: 600;
-            font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;
-            box-shadow: 0 -8px 40px -12px rgba(212,175,55,0.4);
-            transition: transform 0.15s;
-            position: relative; overflow: hidden;
-        }
-        .sticky-bar__btn::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: translateX(-100%);
-            animation: shimmer 3s ease-in-out infinite 2s;
-        }
-        .sticky-bar__btn:active { transform: scale(0.98); }
-        .sticky-bar__btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+@keyframes glowPulse{
+  0%,100%{opacity:.6;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+}
 
-        /* ── Animations ── */
-        .reveal {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        .reveal-d1 { transition-delay: 0.1s; }
-        .reveal-d2 { transition-delay: 0.2s; }
-        .reveal-d3 { transition-delay: 0.3s; }
-        .reveal-d4 { transition-delay: 0.4s; }
+/* ===== BADGE ===== */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 14px;
+  background:rgba(250,204,21,.08);
+  border:1px solid rgba(250,204,21,.15);
+  border-radius:100px;
+  font-size:11px;
+  font-weight:500;
+  color:var(--gold-1);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin:0 auto 16px;
+  animation:fadeUp .6s .3s cubic-bezier(.16,1,.3,1) both;
+}
 
-        /* ── Selection ── */
-        ::selection { background: var(--gold); color: var(--dark); }
-    </style>
+.badge .dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--gold-1);
+  animation:dotBlink 2s ease-in-out infinite;
+}
 
-    <!-- Meta Pixel -->
-    <script>
-    try {
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window,document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init','3162058067317960');
-        fbq('track','PageView');
-    } catch(e){}
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3162058067317960&ev=PageView&noscript=1"/></noscript>
+@keyframes dotBlink{
+  0%,100%{opacity:1}
+  50%{opacity:.3}
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1{
+  font-size:26px;
+  font-weight:700;
+  text-align:center;
+  letter-spacing:-.03em;
+  line-height:1.15;
+  margin-bottom:10px;
+  animation:fadeUp .6s .35s cubic-bezier(.16,1,.3,1) both;
+}
+
+h1 .gold{
+  background:linear-gradient(135deg,var(--gold-1),var(--gold-3),var(--gold-1));
+  background-size:200% 200%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:goldShift 3s ease-in-out infinite;
+}
+
+@keyframes goldShift{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+
+
+
+@keyframes fadeUp{
+  0%{opacity:0;transform:translateY(15px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+
+/* ===== TICKER STRIP ===== */
+.ticker-strip{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:10px 14px;
+  background:rgba(250,204,21,.04);
+  border:1px solid rgba(250,204,21,.08);
+  border-radius:12px;
+  margin-bottom:18px;
+  animation:fadeUp .6s .45s cubic-bezier(.16,1,.3,1) both;
+  overflow:hidden;
+}
+
+.ticker-strip .t-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+  font-size:11.5px;
+  flex-shrink:0;
+}
+
+.ticker-strip .t-sym{
+  font-weight:700;
+  color:var(--gold-1);
+  font-size:11px;
+}
+
+.ticker-strip .t-price{
+  color:var(--text-primary);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+}
+
+.ticker-strip .t-chg{
+  font-size:10px;
+  font-weight:600;
+}
+
+.ticker-strip .t-chg.up{color:#22C55E}
+.ticker-strip .t-chg.down{color:#EF4444}
+
+.ticker-strip .t-dot{
+  width:3px;height:3px;
+  background:var(--text-dim);
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+.ticker-scroll{
+  display:flex;
+  gap:14px;
+  animation:tickerMove 18s linear infinite;
+  width:max-content;
+}
+
+@keyframes tickerMove{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* ===== DIVIDER ===== */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(250,204,21,.15),transparent);
+  margin:0 0 20px;
+  animation:fadeUp .6s .45s cubic-bezier(.16,1,.3,1) both;
+}
+
+/* ===== FEATURES ===== */
+.features{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.features li{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  font-size:13.5px;
+  font-weight:400;
+  color:#D4D4D8;
+  line-height:1.5;
+  animation:fadeUp .6s both;
+}
+
+.features li:nth-child(1){animation-delay:.5s}
+.features li:nth-child(2){animation-delay:.55s}
+.features li:nth-child(3){animation-delay:.6s}
+.features li:nth-child(4){animation-delay:.65s}
+
+.feat-icon{
+  flex-shrink:0;
+  width:28px;height:28px;
+  border-radius:8px;
+  background:rgba(250,204,21,.08);
+  border:1px solid rgba(250,204,21,.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:1px;
+}
+
+.feat-icon iconify-icon{
+  font-size:14px;
+  color:var(--gold-1);
+}
+
+.features li strong{
+  color:var(--text-primary);
+  font-weight:600;
+}
+
+/* ===== STATS ROW ===== */
+.stats-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:22px;
+  animation:fadeUp .6s .7s cubic-bezier(.16,1,.3,1) both;
+}
+
+.stat-box{
+  text-align:center;
+  padding:14px 10px;
+  background:rgba(250,204,21,.04);
+  border:1px solid rgba(250,204,21,.08);
+  border-radius:12px;
+}
+
+.stat-box .stat-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:22px;
+  font-weight:700;
+  color:var(--gold-1);
+  line-height:1;
+  margin-bottom:4px;
+}
+
+.stat-box .stat-label{
+  font-size:10px;
+  color:var(--text-dim);
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  font-weight:500;
+}
+
+/* ===== CTA BUTTON ===== */
+.cta-wrap{
+  animation:fadeUp .6s .75s cubic-bezier(.16,1,.3,1) both;
+}
+
+.cta-btn{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  padding:17px 24px;
+  background:linear-gradient(135deg,var(--gold-1),var(--gold-3));
+  color:#000;
+  text-decoration:none;
+  border:none;
+  border-radius:14px;
+  font-family:'Inter',sans-serif;
+  font-size:14.5px;
+  font-weight:700;
+  letter-spacing:.01em;
+  cursor:pointer;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(250,204,21,.5),
+    0 8px 24px -4px rgba(250,204,21,.3),
+    0 0 40px -8px rgba(250,204,21,.2);
+}
+
+.cta-btn::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.25) 50%,transparent 60%);
+  transform:translateX(-100%);
+  transition:transform .6s;
+}
+
+.cta-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(250,204,21,.7),
+    0 12px 32px -4px rgba(250,204,21,.4),
+    0 0 60px -8px rgba(250,204,21,.3);
+}
+
+.cta-btn:hover::before{
+  transform:translateX(100%);
+}
+
+.cta-btn:active{
+  transform:translateY(0) scale(.98);
+}
+
+.cta-btn iconify-icon{
+  font-size:18px;
+  transition:transform .3s;
+}
+
+.cta-btn:hover iconify-icon{
+  transform:translateX(3px);
+}
+
+.pulse-ring{
+  position:absolute;
+  inset:-3px;
+  border-radius:17px;
+  border:2px solid var(--gold-1);
+  opacity:0;
+  animation:pulseRing 2.5s ease-out infinite;
+  pointer-events:none;
+}
+
+@keyframes pulseRing{
+  0%{opacity:.6;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.06)}
+}
+
+/* ===== TRUST NOTE ===== */
+.trust-note{
+  text-align:center;
+  font-size:11.5px;
+  color:var(--text-dim);
+  margin-top:16px;
+  line-height:1.7;
+  animation:fadeUp .6s .8s cubic-bezier(.16,1,.3,1) both;
+}
+
+.trust-note .lock{
+  color:var(--gold-3);
+}
+
+/* ===== LIVE COUNTER ===== */
+.live-counter{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:14px;
+  animation:fadeUp .6s .85s cubic-bezier(.16,1,.3,1) both;
+}
+
+.live-dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:#22C55E;
+  position:relative;
+}
+
+.live-dot::after{
+  content:'';
+  position:absolute;
+  inset:-3px;
+  border-radius:50%;
+  background:rgba(34,197,94,.3);
+  animation:livePing 1.5s ease-out infinite;
+}
+
+@keyframes livePing{
+  0%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(2)}
+}
+
+.live-text{
+  font-size:12px;
+  color:var(--text-secondary);
+  font-weight:400;
+}
+
+.live-text span{
+  color:#22C55E;
+  font-weight:600;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.04);
+  text-align:center;
+  animation:fadeUp .6s .9s cubic-bezier(.16,1,.3,1) both;
+}
+
+.footer-links{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  font-size:11px;
+  color:var(--text-dim);
+  margin-bottom:10px;
+}
+
+.footer-links a{
+  color:var(--text-secondary);
+  text-decoration:none;
+  transition:color .2s;
+}
+
+.footer-links a:hover{
+  color:var(--gold-1);
+}
+
+.footer-links .sep{
+  color:rgba(255,255,255,.1);
+}
+
+.advertised{
+  font-size:10.5px;
+  color:var(--text-dim);
+  line-height:1.6;
+}
+
+.advertised a{
+  color:var(--gold-3);
+  text-decoration:none;
+  font-weight:500;
+  transition:color .2s;
+}
+
+.advertised a:hover{
+  color:var(--gold-1);
+}
+
+.disclaimer{
+  font-size:10px;
+  color:rgba(255,255,255,.15);
+  margin-top:6px;
+}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--dark-1)}
+::-webkit-scrollbar-thumb{background:var(--dark-5);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#333}
+
+@media(max-width:480px){
+  body{padding:16px 12px}
+  .card{padding:28px 20px 22px;border-radius:20px}
+  h1{font-size:22px}
+  .logo-wrap{width:76px;height:76px}
+  .logo-inner{width:76px;height:76px}
+  .logo-text{font-size:24px}
+  .features li{font-size:13px}
+  .cta-btn{padding:15px 20px;font-size:14px}
+  .stat-box .stat-num{font-size:20px}
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Ambient BG -->
-    <div class="ambient" aria-hidden="true">
-        <div class="ambient-orb ambient-orb--gold"></div>
-        <div class="ambient-orb ambient-orb--subtle"></div>
+<div class="glow-orb"></div>
+<div class="particles" id="particles"></div>
+
+<div class="card">
+
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <div class="logo-glow"></div>
+    <div class="logo-ring"></div>
+    <div class="logo-inner">
+      <span class="logo-text">IC</span>
     </div>
-    <div class="grain" aria-hidden="true"></div>
+  </div>
 
-    <!-- Page -->
-    <div class="page">
-
-        <!-- Header -->
-        <header class="header">
-            <div class="px header__inner">
-                <a href="#" class="logo" aria-label="Inner Circle Community">
-                    <div class="logo__icon">IC</div>
-                    <div class="logo__name">Inner Circle <em>Community</em></div>
-                </a>
-                <button class="header__btn" onclick="go('main')" aria-label="Join community">Join</button>
-            </div>
-        </header>
-
-        <!-- Hero -->
-        <section class="hero">
-            <div class="px">
-                <div class="live-badge reveal">
-                    <span class="live-badge__dot"></span>
-                    Educational Market Analysis
-                </div>
-                <h1 class="hero__title reveal reveal-d1">
-                    Master Gold<br>With <span class="gold">Inner Circle</span>
-                </h1>
-                <p class="hero__desc reveal reveal-d2">
-                    Free daily XAUUSD analysis, price action concepts & risk management — everything you need to understand gold market dynamics.
-                </p>
-                <button class="hero__cta reveal reveal-d3" onclick="go('main')" aria-label="Join Free Community">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                    Join Free Community
-                </button>
-                <p class="hero__trust reveal reveal-d4">
-                    ✓ Free forever<span>|</span>✓ No credit card<span>|</span>✓ Unsubscribe anytime
-                </p>
-            </div>
-        </section>
-
-        <!-- Ticker -->
-        <div class="ticker reveal" aria-hidden="true">
-            <div class="ticker__track" id="ticker"></div>
-        </div>
-
-        <!-- Features -->
-        <section class="section">
-            <div class="px">
-                <div class="section__head reveal">
-                    <span class="section__label">Curriculum</span>
-                    <h2 class="section__title">What You'll Learn</h2>
-                </div>
-                <div class="features__grid">
-                    <div class="feature-card reveal reveal-d1">
-                        <div class="feature-card__icon">📊</div>
-                        <div class="feature-card__title">Daily Analysis</div>
-                        <div class="feature-card__desc">XAUUSD technical breakdowns every trading day</div>
-                    </div>
-                    <div class="feature-card reveal reveal-d2">
-                        <div class="feature-card__icon">🎯</div>
-                        <div class="feature-card__title">Chart Patterns</div>
-                        <div class="feature-card__desc">Entry & exit zone identification</div>
-                    </div>
-                    <div class="feature-card reveal reveal-d3">
-                        <div class="feature-card__icon">📚</div>
-                        <div class="feature-card__title">Risk Management</div>
-                        <div class="feature-card__desc">Position sizing & trading psychology</div>
-                    </div>
-                    <div class="feature-card reveal reveal-d4">
-                        <div class="feature-card__icon">🛡️</div>
-                        <div class="feature-card__title">Capital Protection</div>
-                        <div class="feature-card__desc">Risk-reward ratio mastery</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <section class="section">
-            <div class="px">
-                <div class="stats__grid reveal">
-                    <div class="stat-card">
-                        <div class="stat-card__number counter" data-target="15000" data-suffix="+">0</div>
-                        <div class="stat-card__label">Members</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card__number counter" data-target="100" data-suffix="%">0</div>
-                        <div class="stat-card__label">Free Education</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonial -->
-        <section class="section">
-            <div class="px">
-                <div class="section__head reveal">
-                    <span class="section__label">Community</span>
-                    <h2 class="section__title">What Members Say</h2>
-                </div>
-                <div class="testimonial reveal">
-                    <div class="testimonial__quote">
-                        The daily analysis changed how I look at gold. No fluff, just clean educational content that actually helps you understand market structure.
-                    </div>
-                    <div class="testimonial__author">
-                        <div class="testimonial__avatar">M</div>
-                        <div>
-                            <div class="testimonial__name">Member</div>
-                            <div class="testimonial__role">Inner Circle since 2024</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Steps -->
-        <section class="section">
-            <div class="px">
-                <div class="section__head reveal">
-                    <span class="section__label">Simple Process</span>
-                    <h2 class="section__title">Get Started</h2>
-                </div>
-                <div class="steps">
-                    <div class="step reveal">
-                        <div class="step__num">1</div>
-                        <div class="step__text"><strong>Tap the Join button</strong> below this page</div>
-                    </div>
-                    <div class="step reveal reveal-d1">
-                        <div class="step__num">2</div>
-                        <div class="step__text"><strong>Open our Telegram</strong> channel</div>
-                    </div>
-                    <div class="step reveal reveal-d2">
-                        <div class="step__num">3</div>
-                        <div class="step__text"><strong>Start learning</strong> from daily posts</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="px">
-                <div class="ads-box reveal">
-                    <span class="ads-box__label">Advertisement</span>
-                    <div class="ads-box__title">For Ads Promotion<em>Digital Ads Expert</em></div>
-                    <p class="ads-box__desc">Reach thousands of active gold learners daily.</p>
-                    <button class="ads-box__btn" onclick="go('ads')" aria-label="Contact for ads">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                        Contact Digital Ads Expert
-                    </button>
-                </div>
-                <div class="footer__links">
-                    <a href="https://privacypolicy-bice.vercel.app" rel="noopener noreferrer">Privacy Policy</a>
-                    <a href="https://daedisclaimer.vercel.app/" rel="noopener noreferrer">Disclaimer</a>
-                </div>
-                <div class="footer__copy">
-                    © 2025 Inner Circle Community<br>
-                    <a href="#" onclick="go('main');return false;">@InnerCircleCommunity</a>
-                </div>
-            </div>
-        </footer>
+  <!-- Badge -->
+  <div style="text-align:center">
+    <div class="badge">
+      <span class="dot"></span>
+      Educational Market Analysis
     </div>
+  </div>
 
-    <!-- Sticky CTA -->
-    <div class="sticky-bar">
-        <div class="sticky-bar__inner">
-            <button class="sticky-bar__btn" onclick="go('main')" aria-label="Join Free Community">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-                Join Free Community
-            </button>
-        </div>
+  <!-- Heading -->
+  <h1>𝐈𝐧𝐧𝐞𝐫 𝐂𝐢𝐫𝐜𝐥𝐞<br><span class="gold">𝐂𝐨𝐦𝐦𝐮𝐧𝐢𝐭𝐲</span></h1>
+
+  <!-- Subtitle -->
+ 
+
+  <!-- Ticker Strip -->
+  <div class="ticker-strip">
+    <div class="ticker-scroll" id="ticker"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Features -->
+  <ul class="features">
+    <li>
+      <div class="feat-icon">
+        <iconify-icon icon="lucide:bar-chart-3"></iconify-icon>
+      </div>
+      <span><strong>Daily Analysis</strong> — XAUUSD technical breakdowns every trading day</span>
+    </li>
+    <li>
+      <div class="feat-icon">
+        <iconify-icon icon="lucide:crosshair"></iconify-icon>
+      </div>
+      <span><strong>Chart Patterns</strong> — Entry &amp; exit zone identification</span>
+    </li>
+    <li>
+      <div class="feat-icon">
+        <iconify-icon icon="lucide:shield-check"></iconify-icon>
+      </div>
+      <span><strong>Risk Management</strong> — Position sizing &amp; trading psychology</span>
+    </li>
+    <li>
+      <div class="feat-icon">
+        <iconify-icon icon="lucide:shield-x"></iconify-icon>
+      </div>
+      <span><strong>Capital Protection</strong> — Risk-reward ratio mastery</span>
+    </li>
+  </ul>
+
+  <!-- Stats Row -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num" id="memberCount">0</div>
+      <div class="stat-label">Members</div>
     </div>
+    <div class="stat-box">
+      <div class="stat-num" id="freePercent">0</div>
+      <div class="stat-label">Free Education</div>
+    </div>
+  </div>
 
-    <script>
-        /* ── Links ── */
-        const LINKS = {
-            main: 'https://t.me/+aNLZvHI4qrU4Yjc1',
-            ads: 'https://t.me/+JP96Y2n0U8xiZWI1'
-        };
-        function go(type) {
-            try { if (typeof fbq !== 'undefined') fbq('track', 'Subscribe', { content_name: 'telegram_join_' + type }); } catch(e){}
-            window.location.href = LINKS[type];
-        }
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a class="cta-btn"
+       href="https://t.me/+aNLZvHI4qrU4Yjc1"
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="if(typeof fbq==='function'){fbq('track','Subscribe');}">
+      <span class="pulse-ring"></span>
+      <iconify-icon icon="lucide:send"></iconify-icon>
+      Join Free Community
+    </a>
+  </div>
 
-        /* ── Ticker Data ── */
-        (function buildTicker() {
-            const items = [
-                { sym: 'XAUUSD', price: '2,654.32', chg: '+0.84%', up: true },
-                { sym: 'XAGUSD', price: '31.18', chg: '+1.12%', up: true },
-                { sym: 'USDJPY', price: '154.20', chg: '-0.23%', up: false },
-                { sym: 'EURUSD', price: '1.0534', chg: '+0.15%', up: true },
-                { sym: 'GBPUSD', price: '1.2612', chg: '-0.08%', up: false },
-                { sym: 'US30', price: '42,180', chg: '+0.42%', up: true },
-            ];
-            const track = document.getElementById('ticker');
-            let html = '';
-            // Duplicate for seamless loop
-            for (let r = 0; r < 2; r++) {
-                items.forEach((it, i) => {
-                    if (i > 0 || r > 0) html += '<span class="ticker__dot"></span>';
-                    html += `<span class="ticker__item">
-                        <span class="symbol">${it.sym}</span>
-                        <span class="price">${it.price}</span>
-                        <span class="change ${it.up ? 'up' : 'down'}">${it.chg}</span>
-                    </span>`;
-                });
-            }
-            track.innerHTML = html;
-        })();
+  <!-- Trust note -->
+  <p class="trust-note">
+    <span class="lock">🔒</span> Free forever · No credit card · Unsubscribe anytime
+  </p>
 
-        /* ── Reveal on Scroll ── */
-        const revealObs = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  <!-- Live counter -->
+  <div class="live-counter">
+    <div class="live-dot"></div>
+    <span class="live-text"><span id="liveCount">0</span> traders joined this week</span>
+  </div>
 
-        /* ── Counter Animation ── */
-        const counterObs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const el = entry.target;
-                const target = parseInt(el.dataset.target);
-                const suffix = el.dataset.suffix || '';
-                const dur = 1800;
-                const start = performance.now();
-                function tick(now) {
-                    const p = Math.min((now - start) / dur, 1);
-                    const eased = 1 - Math.pow(1 - p, 4); // ease-out quart
-                    el.textContent = Math.floor(eased * target).toLocaleString() + suffix;
-                    if (p < 1) requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-                counterObs.unobserve(el);
-            });
-        }, { threshold: 0.5 });
-        document.querySelectorAll('.counter').forEach(c => counterObs.observe(c));
-    </script>
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-links">
+      <a href="https://privacypolicy-bice.vercel.app" target="_blank">Privacy Policy</a>
+      <span class="sep">·</span>
+      <a href="https://daedisclaimer.vercel.app/" target="_blank">Disclaimer</a>
+    </div>
+    <div class="advertised">
+      Advertised by <a href="https://t.me/+JP96Y2n0U8xiZWI1" target="_blank"><strong>Digital Ads Expert</strong></a>
+    </div>
+    <div class="disclaimer">© 2025 Inner Circle Community</div>
+  </div>
+
+</div>
+
+<script>
+// ===== FLOATING PARTICLES =====
+(function(){
+  const container = document.getElementById('particles');
+  const count = 25;
+  for(let i = 0; i < count; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+    p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.opacity = '0';
+    container.appendChild(p);
+  }
+})();
+
+// ===== TICKER =====
+(function(){
+  const items = [
+    { sym:'XAUUSD', price:'2,654.32', chg:'+0.84%', up:true },
+    { sym:'XAGUSD', price:'31.18', chg:'+1.12%', up:true },
+    { sym:'USDJPY', price:'154.20', chg:'-0.23%', up:false },
+    { sym:'EURUSD', price:'1.0534', chg:'+0.15%', up:true },
+    { sym:'GBPUSD', price:'1.2612', chg:'-0.08%', up:false },
+    { sym:'US30', price:'42,180', chg:'+0.42%', up:true },
+  ];
+  const track = document.getElementById('ticker');
+  let html = '';
+  for(let r = 0; r < 3; r++){
+    items.forEach((it,i) => {
+      if(i > 0 || r > 0) html += '<span class="t-dot"></span>';
+      html += `<span class="t-item">
+        <span class="t-sym">${it.sym}</span>
+        <span class="t-price">${it.price}</span>
+        <span class="t-chg ${it.up?'up':'down'}">${it.chg}</span>
+      </span>`;
+    });
+  }
+  track.innerHTML = html;
+})();
+
+// ===== COUNTER ANIMATIONS =====
+(function(){
+  function animateCount(el, target, suffix, duration){
+    const start = performance.now();
+    function easeOutExpo(t){
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+    function update(now){
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.floor(easeOutExpo(progress) * target);
+      el.textContent = value.toLocaleString() + suffix;
+      if(progress < 1) requestAnimationFrame(update);
+    }
+    setTimeout(() => requestAnimationFrame(update), 900);
+  }
+
+  animateCount(document.getElementById('memberCount'), 15000, '+', 2200);
+  animateCount(document.getElementById('freePercent'), 100, '%', 1800);
+  animateCount(document.getElementById('liveCount'), 847, '', 2000);
+})();
+</script>
+
 </body>
 </html>
